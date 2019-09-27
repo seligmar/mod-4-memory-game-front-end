@@ -12,29 +12,29 @@ class BoardGame extends React.Component {
 loadBoard = () => this.setState({gamePaintings: this.props.paintingsToPass})   
 
 checkMatch = painting => {
-    if (this.state.paintingInPlay.id === painting.id) {
-        alert("Match!")
+    if (this.state.paintingInPlay[0].id === painting.id) {
+        alert("Match!")    
     const newArray = this.state.gamePaintings.filter(filteredPainting => filteredPainting.id !== painting.id)    
-    this.setState({gamePaintings: newArray})    
-    this.setState({paintingInPlay: []})    
-    this.setState({cardFlipped: false})     
-    }
-    else 
-    this.setState({paintingInPlay: []})    
-    this.setState({cardFlipped: false})
+    this.setState({gamePaintings: newArray})   
+    this.setState({cardFlipped: false})}  
+   // this.setState({paintingInPlay: []})  }
+  //  this.setState({cardsFlipped: []})    
+   // this.setState({cardsFlipped: []})
+   else 
+   this.setState({gamePaintings: this.state.gamePaintings})
 }
 
-flipCardOnBoard = () =>  this.setState({cardFlipped: true})  
 
- putPaintingInPlay = painting => {
-     this.loadBoard()
-    if (this.state.cardFlipped === false ) {
-        this.setState({paintingInPlay: painting}) 
-        this.setState({cardFlipped: true})
-    }
-    else 
-    this.checkMatch(painting) 
-}
+flipCardOnBoard = () =>  this.setState({cardFlipped: true}) 
+
+componentDidMount() {
+    this.loadBoard()
+} 
+
+putPaintingInPlay = painting => {
+    if (this.state.paintingInPlay.length === 0) {
+    this.setState({paintingInPlay: [painting, ...this.state.paintingInPlay]})} 
+    else this.checkMatch(painting)}
 
     render() { 
     const cards = this.props.paintingsToPass
@@ -42,7 +42,7 @@ flipCardOnBoard = () =>  this.setState({cardFlipped: true})
     <div> {cards.map(card => <Card 
         key={card.id} 
         card={card}
-        anyCardFlipped={this.state.cardFlipped}
+      //  paintingInPlay={this.state.paintingInPlay}
         flipCardOnBoard={this.flipCardOnBoard}
         putPaintingInPlay={this.putPaintingInPlay}
         checkMatch={this.checkMatch}/>

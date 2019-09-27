@@ -1,39 +1,35 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
 import BoardGame from './BoardGame'
-import LeaderBoard from './LeaderBoard';
+import LeaderBoard from './LeaderBoard'
 
-let downloadTimer = 0
 let timeElapsed = 0
 // if (index.length === 0) {
-//   endGame(game)}  
+//   endGame(game)}
 
 class App extends React.Component {
-
   state = {
     paintings: [],
     indeciesToPlay: [],
-    runTime: 0, //set state at end of game and then do patch request
+    runTime: 0, // set state at end of game and then do patch request
     timerOn: false
   }
 
   timerHandle = null
 
   getPaintings = () => {
-    return fetch("http://localhost:3000/paintings")
-      .then(resp => resp.json())
+    return fetch('http://localhost:3001/paintings').then(resp => resp.json())
   }
 
-
   setNewArrayofPaintings = () => {
-    const index = [...Array(97).keys()] //this works 
+    const index = [...Array(97).keys()] // this works
     let newArray = []
-    var i = 0;
+    var i = 0
     while (i < 8) {
-      var rand = index[Math.floor(Math.random() * index.length)]; //this works 
-      var indexNew = index.indexOf(rand);
+      var rand = index[Math.floor(Math.random() * index.length)] // this works
+      var indexNew = index.indexOf(rand)
       if (indexNew > -1) {
-        index.splice(indexNew, 1);
+        index.splice(indexNew, 1)
         newArray.push(rand)
       }
       i++
@@ -41,12 +37,12 @@ class App extends React.Component {
     return newArray
   }
 
-  createNewArray = () => { //this is the function to call on click of 'start game'
+  createNewArray = () => {
+    // this is the function to call on click of 'start game'
     let newArray = this.setNewArrayofPaintings()
     const indeciesToPlay = newArray.concat(...newArray)
     this.setState({ indeciesToPlay })
   }
-
 
   paintingsToPass = () => {
     let indecies = this.state.indeciesToPlay
@@ -54,10 +50,11 @@ class App extends React.Component {
     return indecies.map(index => paintings[index])
   }
 
-  componentDidMount() {
-    this.getPaintings()
-      .then(paintings => this.setState({ paintings }, this.createNewArray)) //magical code to ensure 
-    //this things happen when i want them to happen 
+  componentDidMount () {
+    this.getPaintings().then(paintings =>
+      this.setState({ paintings }, this.createNewArray)
+    ) // magical code to ensure
+    // this things happen when i want them to happen
   }
 
   startGame = () => {
@@ -66,7 +63,7 @@ class App extends React.Component {
 
   startTimer = () => {
     this.setState({ timerOn: true })
-    this.timerHandle = setInterval( () => {
+    this.timerHandle = setInterval(() => {
       timeElapsed += 1
       this.setState({ runTime: timeElapsed })
     }, 1000)
@@ -76,22 +73,24 @@ class App extends React.Component {
     clearInterval(this.timerHandle)
   }
 
-  render() {
+  render () {
     let paintingsToPass = this.paintingsToPass()
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className='App'>
+        <header className='App-header'>
           <h1>Welcome to Art Memory!</h1>
-          <img src="https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg" className="App-logo" alt="logo" />
+          <img
+            src='https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg'
+            className='App-logo'
+            alt='logo'
+          />
           <form>
             <div>Put log in here</div>
           </form>
 
-          <button onClick={() => this.startGame()} > Start Game </button>
+          <button onClick={() => this.startGame()}> Start Game </button>
           <button onClick={() => this.endTimer()}> End Game </button>
-          <LeaderBoard
-            runtime={this.state.runTime}
-          />
+          <LeaderBoard runtime={this.state.runTime} />
 
           <BoardGame
             paintingsToPass={paintingsToPass}
@@ -99,8 +98,8 @@ class App extends React.Component {
           />
         </header>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

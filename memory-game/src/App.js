@@ -10,7 +10,8 @@ class App extends React.Component {
 
   state = {
     paintings: [],
-    indeciesToPlay: []
+    indeciesToPlay: [],
+    runTime: 0 //set state at end of game and then do patch request
   }
 
 getPaintings = () => {

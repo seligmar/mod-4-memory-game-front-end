@@ -1,12 +1,15 @@
 import React from 'react'
 import Card from './Card'
 
+let flippedCards = 0
+
 class BoardGame extends React.Component {
   state = {
     paintingInPlay: [],
     cardFlipped: false,
     gamePaintings: []
   }
+
 
   // loadBoard = () => this.setState({gamePaintings: this.props.paintingsToPass})
 
@@ -45,6 +48,7 @@ class BoardGame extends React.Component {
       </div>
     )
   }
+
 }
 
 export default BoardGame

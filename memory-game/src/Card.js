@@ -1,9 +1,12 @@
+
 import React from 'react'
+
 
 class Card extends React.Component {
   state = {
     flippedOver: false
   }
+
 
   flipCard = e => {
     this.props.flipCardOnBoard()
@@ -28,6 +31,9 @@ class Card extends React.Component {
               alt='Make Art Not War artist: Shepard Fairey'
             />
           )}
+
+
+
         </div>
       </div>
     )

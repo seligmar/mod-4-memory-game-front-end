@@ -24,7 +24,7 @@ checkMatch = painting => {
    // this.setState({paintingInPlay: []})  }
   //  this.setState({cardsFlipped: []})    
    // this.setState({cardsFlipped: []})
-   else 
+   else
    {this.setState({paintingInPlay: []}) }
    alert("no match")
  //  this.clearCardCount()

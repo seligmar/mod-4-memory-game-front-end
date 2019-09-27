@@ -3,7 +3,6 @@ import './App.css';
 import BoardGame from './BoardGame'
 
 
-
 // if (index.length === 0) {
 //   endGame(game)}  
 
@@ -17,7 +16,6 @@ class App extends React.Component {
 getPaintings = () => {
   return fetch("http://localhost:3000/paintings")
   .then(resp => resp.json())
-  .then(paintings => this.setState({paintings}))
 }
 
 
@@ -36,29 +34,34 @@ setNewArrayofPaintings = () => {
   }
  
 createNewArray = () => { //this is the function to call on click of 'start game'
-  let newArray = setNewArrayofPaintings()
-  indeciesToPlay = newArray + [,...newArray]
-  this.setState({indeciesToPlay})
+  let newArray = this.setNewArrayofPaintings()
+  const indeciesToPlay = newArray.concat(...newArray)
+  this.setState({ indeciesToPlay })
 }  
+
 
 paintingsToPass = () => {
   let indecies = this.state.indeciesToPlay
-  let paintings = this.state.paintings 
-  let finalPaintingList = [] 
-  indecies.forEach(index => finalPaintingList.push(paintings[index]))
-  return finalPaintingList
+  let paintings = this.state.paintings
+  return indecies.map(index => paintings[index])
 }
 
 componentDidMount() {
-  getPaintings()
+  this.getPaintings()
+    .then(paintings => this.setState({paintings}, this.createNewArray)) //magical code to ensure 
+    //this things happen when i want them to happen 
 }  
 
 render () {
-  let paintingsToPass = this.paintingsToPass() //not sure this is correct 
+  let paintingsToPass = this.paintingsToPass() 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Welcome to Art Memory!</h1>
+       <img src="https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg" className="App-logo" alt="logo" />
+        <form>
+          <div>Put log in here</div>
+        </form>
         <BoardGame 
         paintingsToPass={paintingsToPass}
         createNewArray={this.createNewArray}

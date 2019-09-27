@@ -1,40 +1,53 @@
 import React from 'react'
 import Card from './Card'
 
+let flippedCards = 0
+
 class BoardGame extends React.Component {
 
     state = {
         paintingInPlay: [],
-        cardFlipped: false,
+        cards: 0,
         gamePaintings: []
     }
 
 loadBoard = () => this.setState({gamePaintings: this.props.paintingsToPass})   
 
 checkMatch = painting => {
+    if (flippedCards === 1) {
     if (this.state.paintingInPlay[0].id === painting.id) {
-        alert("Match!")    
+        alert("Match!")  
+    this.setState({paintingInPlay: []})      
     const newArray = this.state.gamePaintings.filter(filteredPainting => filteredPainting.id !== painting.id)    
-    this.setState({gamePaintings: newArray})   
-    this.setState({cardFlipped: false})}  
+    this.setState({gamePaintings: newArray}, this.clearCardCount)}     }
+  //  this.setState({cardFlipped: false})}  
    // this.setState({paintingInPlay: []})  }
   //  this.setState({cardsFlipped: []})    
    // this.setState({cardsFlipped: []})
    else 
-   this.setState({gamePaintings: this.state.gamePaintings})
+   {this.setState({paintingInPlay: []}) }
+   alert("no match")
+ //  this.clearCardCount()
 }
 
+flipCardOnBoard = () => { 
+    flippedCards +=1 
+    this.setState({ cards: flippedCards})
+    }
 
-flipCardOnBoard = () =>  this.setState({cardFlipped: true}) 
+clearCardCount = () => {
+    flippedCards = 0 
+    this.setState({ cards: flippedCards})
+    }
 
 componentDidMount() {
     this.loadBoard()
 } 
 
 putPaintingInPlay = painting => {
-    if (this.state.paintingInPlay.length === 0) {
-    this.setState({paintingInPlay: [painting, ...this.state.paintingInPlay]})} 
-    else this.checkMatch(painting)}
+    if (flippedCards === 1) {
+    this.setState({paintingInPlay: painting}) 
+}}
 
     render() { 
     const cards = this.props.paintingsToPass
@@ -42,7 +55,8 @@ putPaintingInPlay = painting => {
     <div> {cards.map(card => <Card 
         key={card.id} 
         card={card}
-      //  paintingInPlay={this.state.paintingInPlay}
+        checkMatch={this.checkMatch}
+        flippedCards={this.state.cards}
         flipCardOnBoard={this.flipCardOnBoard}
         putPaintingInPlay={this.putPaintingInPlay}
         checkMatch={this.checkMatch}/>

@@ -22,11 +22,14 @@ checkMatch = (painting) => {
     if (painting.id === painting1.id) {
         MySwal.fire({
             imageUrl: 'https://media.giphy.com/media/flYwljLseVZWE/giphy.gif',
-            text: "Please click the images to turn them back over",
             imageWidth: 300,
             imageHeight: 200,
-            imageAlt: 'Custom image',
-            animation: false
+            width: 300,
+            background: '#090526',
+            confirmButtonColor: 'cornflowerblue',
+            padding: '.25em',
+            imageAlt: 'Bob Ross',
+            animation: false,
           })
     this.removePaintings(painting.id)     
     this.setState({paintingInPlay: []})      
@@ -38,8 +41,14 @@ checkMatch = (painting) => {
         text: "Please click the images to turn them back over", 
         imageWidth: 300,
         imageHeight: 200,
+        confirmButtonText: 'Got it!',
+        background: '#090526',
         imageAlt: 'Bob Ross',
-        animation: false})
+        padding: '.25em',
+        confirmButtonColor: 'cornflowerblue',
+        width: 300,
+        animation: false, 
+    })
    this.clearCardCount() }
 }
 

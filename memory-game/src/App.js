@@ -2,6 +2,10 @@ import React from 'react'
 import './App.css'
 import BoardGame from './BoardGame'
 import LeaderBoard from './LeaderBoard'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 let timeElapsed = 0
 // if (index.length === 0) {
@@ -73,6 +77,19 @@ class App extends React.Component {
 
   endTimer = () => {
     clearInterval(this.timerHandle)
+    MySwal.fire({
+      imageUrl: 'https://media.giphy.com/media/h5AHEcNMhn7u8/giphy.gif',
+      //text: "Please click the images to turn them back over", 
+      imageWidth: 300,
+      imageHeight: 200,
+      imageAlt: 'Bob Ross',
+      animation: false,
+      confirmButtonText: 'Im done',
+      background: '#090526',
+      padding: '.25em',
+      confirmButtonColor: 'cornflowerblue',
+      width: 300,
+    })
   }
 
   render () {

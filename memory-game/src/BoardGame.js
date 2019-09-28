@@ -13,18 +13,19 @@ class BoardGame extends React.Component {
 
 loadBoard = () => this.setState({gamePaintings: this.props.paintingsToPass})   
 
-checkMatch = painting => {
-    if (flippedCards === 1) {
-    if (this.state.paintingInPlay[0].id === painting.id) {
+checkMatch = (painting) => {
+    const painting1 = this.state.paintingInPlay[1] 
+    //if painting1
+    if (painting.id === painting1.id) {
         alert("Match!")  
     this.setState({paintingInPlay: []})      
-   // const newArray = this.state.gamePaintings.filter(filteredPainting => filteredPainting.id !== painting.id)    
-   // this.setState({gamePaintings: newArray}, )}     }
-    this.clearCardCount();}
+    const newArray = this.state.gamePaintings.filter(filteredPainting => filteredPainting.id !== painting1.id)    
+    this.setState({removedPaintings: newArray}, ) 
+    this.clearCardCount() }
    else
    this.setState({paintingInPlay: []}) 
    alert("no match")
-   this.clearCardCount()}
+   this.clearCardCount()
 }
 
 flipCardOnBoard = () => { 
@@ -43,7 +44,9 @@ clearCardCount = () => {
 
 putPaintingInPlay = painting => {
     if (flippedCards === 1) {
-    this.setState({paintingInPlay: painting}) 
+    this.setState({paintingInPlay: painting}) }
+    if (flippedCards === 2) {
+        this.setState({paintingInPlay: [painting, this.state.paintingInPlay]}) 
 }}
 
     render() { 

@@ -8,7 +8,7 @@ class BoardGame extends React.Component {
     state = {
         paintingInPlay: [],
         cards: 0,
-        gamePaintings: []
+        removedPaintings: []
     }
 
 loadBoard = () => this.setState({gamePaintings: this.props.paintingsToPass})   
@@ -18,16 +18,13 @@ checkMatch = painting => {
     if (this.state.paintingInPlay[0].id === painting.id) {
         alert("Match!")  
     this.setState({paintingInPlay: []})      
-    const newArray = this.state.gamePaintings.filter(filteredPainting => filteredPainting.id !== painting.id)    
-    this.setState({gamePaintings: newArray}, this.clearCardCount)}     }
-  //  this.setState({cardFlipped: false})}  
-   // this.setState({paintingInPlay: []})  }
-  //  this.setState({cardsFlipped: []})    
-   // this.setState({cardsFlipped: []})
+   // const newArray = this.state.gamePaintings.filter(filteredPainting => filteredPainting.id !== painting.id)    
+   // this.setState({gamePaintings: newArray}, )}     }
+    this.clearCardCount();}
    else
-   {this.setState({paintingInPlay: []}) }
+   this.setState({paintingInPlay: []}) 
    alert("no match")
- //  this.clearCardCount()
+   this.clearCardCount()}
 }
 
 flipCardOnBoard = () => { 
@@ -40,9 +37,9 @@ clearCardCount = () => {
     this.setState({ cards: flippedCards})
     }
 
-componentDidMount() {
-    this.loadBoard()
-} 
+// componentDidMount() {
+//     this.loadBoard()
+// } 
 
 putPaintingInPlay = painting => {
     if (flippedCards === 1) {
@@ -52,17 +49,17 @@ putPaintingInPlay = painting => {
     render() { 
     const cards = this.props.paintingsToPass
     return  (
-    <div> {cards.map(card => <Card 
+    	<div className="grid-container">
+        {cards.map(card => <Card 
+        className="grid-item"
         key={card.id} 
         card={card}
         checkMatch={this.checkMatch}
         flippedCards={this.state.cards}
         flipCardOnBoard={this.flipCardOnBoard}
         putPaintingInPlay={this.putPaintingInPlay}
-        checkMatch={this.checkMatch}/>
-        )} 
-    </div> )
-    }
+       />)}
+    </div> )}
 }
 
 export default BoardGame

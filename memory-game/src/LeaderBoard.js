@@ -32,7 +32,7 @@ class LeaderBoard extends React.Component {
   render () {
     return (
       <div>
-        <h1>Leader Board</h1>
+        {/* <h1>Leader Board</h1>
         <ul>
           {this.state.leaderArray.map((user, index) => {
             return (
@@ -41,7 +41,7 @@ class LeaderBoard extends React.Component {
               </li>
             )
           })}
-        </ul>
+        </ul> */}
       </div>
     )
   }

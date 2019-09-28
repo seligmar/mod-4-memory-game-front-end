@@ -34,7 +34,7 @@ flipCard = e => {
                  : 
             <div> <img onClick={e => (this.flipCardAndInitiate(e))} className = "img" src="http://www.thecontemporarychester.com/wp-content/uploads/2016/01/image9.jpg" alt="Make Art Not War artist: Shepard Fairey" /></div> } 
         </div>
-        )
+        )}
     }
 export default Card
     

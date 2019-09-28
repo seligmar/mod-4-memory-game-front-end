@@ -88,7 +88,6 @@ class App extends React.Component {
           <form>
             <div>Put log in here</div>
           </form>
-
           <button className= "start-page-buttons" onClick={() => this.startGame()} > Start Game </button>
           <button className= "start-page-buttons" onClick={() => this.endTimer()}> End Game </button>
           <LeaderBoard

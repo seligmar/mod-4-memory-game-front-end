@@ -50,15 +50,16 @@ class App extends React.Component {
     return indecies.map(index => paintings[index])
   }
 
-  componentDidMount () {
-    this.getPaintings().then(paintings =>
-      this.setState({ paintings }, this.createNewArray)
-    ) // magical code to ensure
-    // this things happen when i want them to happen
+
+  componentDidMount() {
+    this.getPaintings()
+    .then(paintings => this.setState({ paintings })) //magical code to ensure 
+    //this things happen when i want them to happen 
   }
 
   startGame = () => {
     this.startTimer()
+    this.createNewArray()
   }
 
   startTimer = () => {
@@ -88,9 +89,11 @@ class App extends React.Component {
             <div>Put log in here</div>
           </form>
 
-          <button onClick={() => this.startGame()}> Start Game </button>
-          <button onClick={() => this.endTimer()}> End Game </button>
-          <LeaderBoard runtime={this.state.runTime} />
+          <button className= "start-page-buttons" onClick={() => this.startGame()} > Start Game </button>
+          <button className= "start-page-buttons" onClick={() => this.endTimer()}> End Game </button>
+          <LeaderBoard
+            runtime={this.state.runTime}
+          />
 
           <BoardGame
             paintingsToPass={paintingsToPass}

@@ -7,7 +7,7 @@
 }
 
 .App-header {
-  background-color: skyblue;
+  background-color: #090526; 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,4 +23,60 @@
 
 .img {
   height: 40vmin;
+  max-width: 100%;
+  padding: 10px
+}
+
+.img-flipped {
+  height: 30vmin;
+  max-width: 100%;
+
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.grid-item {
+  background-color: navy;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  font-size: 30px;
+  text-align: center
+}
+
+.question-buttons {
+  display: flex;
+  align-items: center;
+  margin-right: 30%;
+  margin-left: 40%;
+  background-color: aqua;
+  background-color: cornflowerblue;
+  color: white;
+  align-content: center;
+}
+
+.start-page-buttons {
+  padding: 10px;
+  background-color: aqua;
+  background-color: cornflowerblue;
+  color: white;
+  align-content: center;
+}
+
+.details {
+  font-size: 10px;
+}
+
+.flipped-card-div {
+  border: 1px cornflowerblue;
+  background-color: #030112; 
+  padding: 10px
+}
+
+.card-div {
+  height: 40vmin;
+  width: 40vmin;
+  padding: 10px; 
 }

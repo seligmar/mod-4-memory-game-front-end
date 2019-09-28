@@ -1,5 +1,10 @@
 import React from 'react'
 import Card from './Card'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
+
 
 let flippedCards = 0
 
@@ -15,13 +20,26 @@ checkMatch = (painting) => {
     const painting1 = this.state.paintingInPlay[1] 
     //if painting1
     if (painting.id === painting1.id) {
-        alert("Match!") 
+        MySwal.fire({
+            imageUrl: 'https://media.giphy.com/media/flYwljLseVZWE/giphy.gif',
+            text: "Please click the images to turn them back over",
+            imageWidth: 300,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+            animation: false
+          })
     this.removePaintings(painting.id)     
     this.setState({paintingInPlay: []})      
     this.clearCardCount() }
    else
   { this.setState({paintingInPlay: []}) 
-      alert("no match")
+    MySwal.fire({
+        imageUrl: 'https://media.giphy.com/media/rYEAkYihZsyWs/giphy.gif',
+        text: "Please click the images to turn them back over", 
+        imageWidth: 300,
+        imageHeight: 200,
+        imageAlt: 'Bob Ross',
+        animation: false})
    this.clearCardCount() }
 }
 

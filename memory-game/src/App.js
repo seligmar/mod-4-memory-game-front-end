@@ -18,7 +18,7 @@ class App extends React.Component {
   timerHandle = null
 
   getPaintings = () => {
-    return fetch('http://localhost:3001/paintings').then(resp => resp.json())
+    return fetch('http://localhost:3000/paintings').then(resp => resp.json())
   }
 
   setNewArrayofPaintings = () => {
@@ -53,7 +53,8 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getPaintings()
-    .then(paintings => this.setState({ paintings })) //magical code to ensure 
+    .then(paintings => this.setState({ paintings }))
+   //magical code to ensure 
     //this things happen when i want them to happen 
   }
 

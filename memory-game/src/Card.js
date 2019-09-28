@@ -1,4 +1,6 @@
-import React from 'react';
+
+import React from 'react'
+
 
 class Card extends React.Component {
 
@@ -34,9 +36,5 @@ flipCard = e => {
         </div>
         )
     }
-
-}
 export default Card
-
-
-
+    

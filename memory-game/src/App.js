@@ -15,7 +15,7 @@ class App extends React.Component {
   state = {
     paintings: [],
     indeciesToPlay: [],
-    runTime: 0, // set state at end of game and then do patch request
+    runtime: 0, // set state at end of game and then do patch request
     timerOn: false
   }
 
@@ -71,7 +71,7 @@ class App extends React.Component {
     this.setState({ timerOn: true })
     this.timerHandle = setInterval(() => {
       timeElapsed += 1
-      this.setState({ runTime: timeElapsed })
+      this.setState({ runtime: timeElapsed })
     }, 1000)
   }
 
@@ -108,8 +108,9 @@ class App extends React.Component {
           </form>
           <button className= "start-page-buttons" onClick={() => this.startGame()} > Start Game </button>
           <button className= "start-page-buttons" onClick={() => this.endTimer()}> End Game </button>
+          <br></br>
           <LeaderBoard
-            runtime={this.state.runTime}
+            runtime={this.state.runtime}
           />
 
           <BoardGame

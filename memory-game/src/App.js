@@ -9,7 +9,7 @@ import { Button } from 'semantic-ui-react'
 
 const MySwal = withReactContent(Swal)
 
-//"59bd59dc139b214a3672abe5" is id to remove from db 
+// "59bd59dc139b214a3672abe5" is id to remove from db
 
 let timeElapsed = 0
 // if (index.length === 0) {
@@ -31,7 +31,7 @@ class App extends React.Component {
 
   setNewArrayofPaintings = () => {
     const index = [...Array(97).keys()] // this works
-    let newArray = []
+    const newArray = []
     var i = 0
     while (i < 8) {
       var rand = index[Math.floor(Math.random() * index.length)] // this works
@@ -47,39 +47,36 @@ class App extends React.Component {
 
   createNewArray = () => {
     // this is the function to call on click of 'start game'
-    let newArray = this.setNewArrayofPaintings()
+    const newArray = this.setNewArrayofPaintings()
     const arrayOf16 = newArray.concat(...newArray)
     this.shuffle(arrayOf16)
   }
 
-  shuffle = (array) => {
-    let counter = array.length;
+  shuffle = array => {
+    let counter = array.length
     while (counter > 0) {
-        let index = Math.floor(Math.random() * counter);
-        counter--;
-        let temp = array[counter];
-        array[counter] = array[index];
-        array[index] = temp;
+      const index = Math.floor(Math.random() * counter)
+      counter--
+      const temp = array[counter]
+      array[counter] = array[index]
+      array[index] = temp
     }
     this.setState({ indeciesToPlay: array })
   }
 
   paintingsToPass = () => {
-    let indecies = this.state.indeciesToPlay
-    let paintings = this.state.paintings
+    const indecies = this.state.indeciesToPlay
+    const paintings = this.state.paintings
     return indecies.map(index => paintings[index])
   }
 
   componentDidMount () {
     this.getPaintings().then(paintings => this.setState({ paintings }))
-    // magical code to ensure
-    // this things happen when i want them to happen
   }
 
   startGame = () => {
     this.startTimer()
     this.createNewArray()
-    
   }
 
   startTimer = () => {
@@ -104,7 +101,7 @@ class App extends React.Component {
       confirmButtonColor: 'cornflowerblue',
       width: 300
     })
-    this.setState({ indeciesToPlay: []})
+    this.setState({ indeciesToPlay: [] })
   }
 
   endGame = () => {
@@ -112,7 +109,7 @@ class App extends React.Component {
   }
 
   render () {
-    let paintingsToPass = this.paintingsToPass()
+    const paintingsToPass = this.paintingsToPass()
     return (
       <div className='App'>
         <header className='App-header'>
@@ -122,26 +119,30 @@ class App extends React.Component {
             className='App-logo'
             alt='logo'
           />
-          <Button size='large' primary
-            className='start-page-buttons' 
+          <Button
+            size='large'
+            primary
+            className='start-page-buttons'
             onClick={() => this.startGame()}
           >
             {' '}
             Start Game{' '}
-            </Button>
-            <br></br>
-          <Button size='large' primary 
-            className='start-page-buttons' 
+          </Button>
+          <br />
+          <Button
+            size='large'
+            primary
+            className='start-page-buttons'
             onClick={() => this.endGame()}
           >
             {'   '}
-            End Game  {'  '}
-            </Button>
+            End Game {'  '}
+          </Button>
           <br />
           <LeaderBoard runtime={this.state.runtime} />
 
           <BoardGame
-           endGame={this.endGame}
+            endGame={this.endGame}
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />

@@ -54,7 +54,7 @@ class LeaderBoard extends React.Component {
 
   render () {
     return (
-      <div id='container'>
+      <div style={{ backgroundColor: '#030112' }} id='container'>
         <h1>Leader Board</h1>
         <h2 style={{ color: 'red' }}>Time Elapsed: {this.props.runtime}</h2>
         <div class='row'>

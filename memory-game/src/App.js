@@ -79,6 +79,7 @@ class App extends React.Component {
   startGame = () => {
     this.startTimer()
     this.createNewArray()
+    
   }
 
   startTimer = () => {
@@ -93,7 +94,6 @@ class App extends React.Component {
     clearInterval(this.timerHandle)
     MySwal.fire({
       imageUrl: 'https://media.giphy.com/media/h5AHEcNMhn7u8/giphy.gif',
-      // text: "Please click the images to turn them back over",
       imageWidth: 300,
       imageHeight: 200,
       imageAlt: 'Bob Ross',
@@ -104,6 +104,7 @@ class App extends React.Component {
       confirmButtonColor: 'cornflowerblue',
       width: 300
     })
+    this.setState({ indeciesToPlay: []})
   }
 
   render () {
@@ -111,9 +112,6 @@ class App extends React.Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          <Button size='massive' primary>
-            Nice
-          </Button>
           <h1>Welcome to Art Memory!</h1>
           <img
             src='https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg'
@@ -123,24 +121,27 @@ class App extends React.Component {
           <form>
             <div>Put log in here</div>
           </form>
-          <button
-            className='start-page-buttons'
+  
+          <Button size='large' primary
+            className='start-page-buttons' 
             onClick={() => this.startGame()}
           >
             {' '}
             Start Game{' '}
-          </button>
-          <button
-            className='start-page-buttons'
+            </Button>
+            <br></br>
+          <Button size='large' primary 
+            className='start-page-buttons' 
             onClick={() => this.endTimer()}
           >
-            {' '}
-            End Game{' '}
-          </button>
+            {'   '}
+            End Game  {'  '}
+            </Button>
           <br />
           <LeaderBoard runtime={this.state.runtime} />
 
           <BoardGame
+           endTimer={this.endTimer}
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />

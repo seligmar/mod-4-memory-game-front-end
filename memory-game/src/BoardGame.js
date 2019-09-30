@@ -18,7 +18,6 @@ class BoardGame extends React.Component {
 
 checkMatch = (painting) => {
     const painting1 = this.state.paintingInPlay[1] 
-    //if painting1
     if (painting.id === painting1.id) {
         MySwal.fire({
             imageUrl: 'https://media.giphy.com/media/flYwljLseVZWE/giphy.gif',
@@ -32,7 +31,8 @@ checkMatch = (painting) => {
             animation: false,
           })
     this.removePaintings(painting.id)     
-    this.setState({paintingInPlay: []})      
+    this.setState({paintingInPlay: []})  
+    this.flipAll()    
     this.clearCardCount() }
    else
   { this.setState({paintingInPlay: []}) 
@@ -49,13 +49,16 @@ checkMatch = (painting) => {
         width: 300,
         animation: false, 
     })
-   this.clearCardCount() }
+   this.clearCardCount() 
+    this.flipAll()}
 }
 
 flipCardOnBoard = () => { 
     flippedCards +=1 
     this.setState({ cards: flippedCards})
     }
+
+flipAll = () => true    
 
 clearCardCount = () => {
     flippedCards = 0 
@@ -65,12 +68,8 @@ clearCardCount = () => {
 removePaintings = id => {
     const cards = this.props.paintingsToPass
     const newArray = cards.filter(filteredPainting => filteredPainting.id === id)    
-    this.setState({removedPaintings: newArray}) 
+    this.setState({removedPaintings: this.state.removedPaintings.concat(newArray)}) 
 }    
-
-// componentDidMount() {
-//     this.loadBoard()
-// } 
 
 putPaintingInPlay = painting => {
     if (flippedCards === 1) {
@@ -88,6 +87,7 @@ putPaintingInPlay = painting => {
         className="grid-item"
         removedPaintings={this.state.removedPaintings}
         key={card.id} 
+        flipAll={this.flipAll}
         card={card}
         checkMatch={this.checkMatch}
         flippedCards={this.state.cards}

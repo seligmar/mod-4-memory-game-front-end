@@ -5,6 +5,8 @@ import LeaderBoard from './LeaderBoard'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+import { Button } from 'semantic-ui-react'
+
 const MySwal = withReactContent(Swal)
 
 //"59bd59dc139b214a3672abe5" is id to remove from db 
@@ -75,12 +77,10 @@ class App extends React.Component {
     return indecies.map(index => paintings[index])
   }
 
-
-  componentDidMount() {
-    this.getPaintings()
-    .then(paintings => this.setState({ paintings }))
-   //magical code to ensure 
-    //this things happen when i want them to happen 
+  componentDidMount () {
+    this.getPaintings().then(paintings => this.setState({ paintings }))
+    // magical code to ensure
+    // this things happen when i want them to happen
   }
 
   startGame = () => {
@@ -100,7 +100,7 @@ class App extends React.Component {
     clearInterval(this.timerHandle)
     MySwal.fire({
       imageUrl: 'https://media.giphy.com/media/h5AHEcNMhn7u8/giphy.gif',
-      //text: "Please click the images to turn them back over", 
+      // text: "Please click the images to turn them back over",
       imageWidth: 300,
       imageHeight: 200,
       imageAlt: 'Bob Ross',
@@ -109,7 +109,7 @@ class App extends React.Component {
       background: '#090526',
       padding: '.25em',
       confirmButtonColor: 'cornflowerblue',
-      width: 300,
+      width: 300
     })
   }
 
@@ -118,6 +118,9 @@ class App extends React.Component {
     return (
       <div className='App'>
         <header className='App-header'>
+          <Button size='massive' primary>
+            Nice
+          </Button>
           <h1>Welcome to Art Memory!</h1>
           <img
             src='https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg'
@@ -127,12 +130,22 @@ class App extends React.Component {
           <form>
             <div>Put log in here</div>
           </form>
-          <button className= "start-page-buttons" onClick={() => this.startGame()} > Start Game </button>
-          <button className= "start-page-buttons" onClick={() => this.endTimer()}> End Game </button>
-          <br></br>
-          <LeaderBoard
-            runtime={this.state.runtime}
-          />
+          <button
+            className='start-page-buttons'
+            onClick={() => this.startGame()}
+          >
+            {' '}
+            Start Game{' '}
+          </button>
+          <button
+            className='start-page-buttons'
+            onClick={() => this.endTimer()}
+          >
+            {' '}
+            End Game{' '}
+          </button>
+          <br />
+          <LeaderBoard runtime={this.state.runtime} />
 
           <BoardGame
             paintingsToPass={paintingsToPass}

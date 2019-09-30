@@ -21,6 +21,7 @@ checkMatch = (painting) => {
     if (painting.id === painting1.id) {
         MySwal.fire({
             imageUrl: 'https://media.giphy.com/media/flYwljLseVZWE/giphy.gif',
+            text: "They Match!",
             imageWidth: 300,
             imageHeight: 200,
             width: 300,
@@ -38,10 +39,9 @@ checkMatch = (painting) => {
   { this.setState({paintingInPlay: []}) 
     MySwal.fire({
         imageUrl: 'https://media.giphy.com/media/rYEAkYihZsyWs/giphy.gif',
-        text: "Please click the images to turn them back over", 
         imageWidth: 300,
         imageHeight: 200,
-        confirmButtonText: 'Got it!',
+        confirmButtonText: 'Next!',
         background: '#090526',
         imageAlt: 'Bob Ross',
         padding: '.25em',
@@ -76,7 +76,8 @@ putPaintingInPlay = painting => {
     this.setState({paintingInPlay: painting}) }
     if (flippedCards === 2) {
         this.setState({paintingInPlay: [painting, this.state.paintingInPlay]}) 
-}}
+}
+}
  
 
     render() {   
@@ -91,6 +92,7 @@ putPaintingInPlay = painting => {
         card={card}
         checkMatch={this.checkMatch}
         flippedCards={this.state.cards}
+        inPlay={this.state.paintingInPlay}
         flipCardOnBoard={this.flipCardOnBoard}
         putPaintingInPlay={this.putPaintingInPlay}
        />)}

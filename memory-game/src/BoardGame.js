@@ -38,10 +38,9 @@ checkMatch = (painting) => {
   { this.setState({paintingInPlay: []}) 
     MySwal.fire({
         imageUrl: 'https://media.giphy.com/media/rYEAkYihZsyWs/giphy.gif',
-        text: "Please click the images to turn them back over", 
         imageWidth: 300,
         imageHeight: 200,
-        confirmButtonText: 'Got it!',
+        confirmButtonText: 'Next!',
         background: '#090526',
         imageAlt: 'Bob Ross',
         padding: '.25em',

@@ -1,6 +1,6 @@
 
 import React from 'react'
-
+import { Button } from 'semantic-ui-react'
 
 class Card extends React.Component {
 
@@ -29,7 +29,7 @@ checkImgToShow = () => {
         return ( <div className="flipped-card-div"> 
           <img onClick={e => (this.flipCard(e))} className = "img-flipped" src={this.props.card.image} alt={this.props.card.title} /> 
           <p className="details">Title: {this.props.card.title} Artist: {this.props.card.artist.name}</p>
-          <button className= "question-buttons" onClick={e => this.props.checkMatch(this.props.card)}>Match?</button> 
+          <button className= "ui mini button blue" onClick={e => this.props.checkMatch(this.props.card)}>Match?</button> 
        
         </div> ) }
      if   (this.state.flippedOver === true) {

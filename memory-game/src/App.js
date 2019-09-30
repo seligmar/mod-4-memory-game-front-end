@@ -4,8 +4,11 @@ import BoardGame from './BoardGame'
 import LeaderBoard from './LeaderBoard'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
+
+const USERSURL = 'http://localhost:3001/users'
 
 const MySwal = withReactContent(Swal)
 
@@ -106,8 +109,30 @@ class App extends React.Component {
     this.setState({ indeciesToPlay: [] })
   }
 
+  postData = (username, score) => {
+    const data = {
+      playerTotal: 7,
+      user: {
+        id: 8,
+        username: username,
+        password_digest: null,
+        highScore: score
+      }
+    }
+    return fetch(USERSURL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(resp => resp.json())
+      .then(resp => console.log(resp))
+  }
+
   endGame = () => {
     this.endTimer()
+    this.postData(this.props.currentPlayer, this.state.runtime)
+    // .then(resp => resp.json
+    // .then(this.props.history.push('/game'))
   }
 
   render () {
@@ -141,7 +166,10 @@ class App extends React.Component {
             End Game {'  '}
           </Button>
           <br />
-          <LeaderBoard runtime={this.state.runtime} />
+          <LeaderBoard
+            runtime={this.state.runtime}
+            currentPlayer={this.props.currentPlayer}
+          />
 
           <BoardGame
             endGame={this.endGame}
@@ -154,4 +182,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default withRouter(App)

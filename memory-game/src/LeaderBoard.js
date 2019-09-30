@@ -27,7 +27,9 @@ class LeaderBoard extends React.Component {
   componentDidMount () {
     this.fetchUsers().then(users => {
       if (users.length > 10) {
-        users = users.splice(0, 10)
+        users = users.sort((a, b) => {
+          return a.user.highScore - b.user.highScore
+        }).splice(0, 10)
       }
       this.setState({ leaderArray: users })
     })
@@ -71,8 +73,17 @@ class LeaderBoard extends React.Component {
           if (user.user.username === 'currentPlayer') {
             return (
               <div key={user.user.id} style={{ color: 'green' }} class='row'>
-                <div class='name'> <b><i>{user.user.username}</i></b></div>
-                <div class='score'><b><i>{user.user.highScore}</i></b></div>
+                <div class='name'>
+                  {' '}
+                  <b>
+                    <i>{user.user.username}</i>
+                  </b>
+                </div>
+                <div class='score'>
+                  <b>
+                    <i>{user.user.highScore}</i>
+                  </b>
+                </div>
               </div>
             )
           } else {

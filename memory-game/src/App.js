@@ -9,7 +9,7 @@ import { Button } from 'semantic-ui-react'
 
 const MySwal = withReactContent(Swal)
 
-//"59bd59dc139b214a3672abe5" is id to remove from db 
+// "59bd59dc139b214a3672abe5" is id to remove from db
 
 let timeElapsed = 0
 // if (index.length === 0) {
@@ -52,14 +52,14 @@ class App extends React.Component {
     this.shuffle(arrayOf16)
   }
 
-  shuffle = (array) => {
-    let counter = array.length;
+  shuffle = array => {
+    let counter = array.length
     while (counter > 0) {
-        let index = Math.floor(Math.random() * counter);
-        counter--;
-        let temp = array[counter];
-        array[counter] = array[index];
-        array[index] = temp;
+      let index = Math.floor(Math.random() * counter)
+      counter--
+      let temp = array[counter]
+      array[counter] = array[index]
+      array[index] = temp
     }
     this.setState({ indeciesToPlay: array })
   }
@@ -79,7 +79,6 @@ class App extends React.Component {
   startGame = () => {
     this.startTimer()
     this.createNewArray()
-    
   }
 
   startTimer = () => {
@@ -104,7 +103,7 @@ class App extends React.Component {
       confirmButtonColor: 'cornflowerblue',
       width: 300
     })
-    this.setState({ indeciesToPlay: []})
+    this.setState({ indeciesToPlay: [] })
   }
 
   endGame = () => {
@@ -122,26 +121,30 @@ class App extends React.Component {
             className='App-logo'
             alt='logo'
           />
-          <Button size='large' primary
-            className='start-page-buttons' 
+          <Button
+            size='large'
+            primary
+            className='start-page-buttons'
             onClick={() => this.startGame()}
           >
             {' '}
             Start Game{' '}
-            </Button>
-            <br></br>
-          <Button size='large' primary 
-            className='start-page-buttons' 
+          </Button>
+          <br />
+          <Button
+            size='large'
+            primary
+            className='start-page-buttons'
             onClick={() => this.endGame()}
           >
             {'   '}
-            End Game  {'  '}
-            </Button>
+            End Game {'  '}
+          </Button>
           <br />
           <LeaderBoard runtime={this.state.runtime} />
 
           <BoardGame
-           endGame={this.endGame}
+            endGame={this.endGame}
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />

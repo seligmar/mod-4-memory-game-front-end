@@ -21,6 +21,7 @@ checkMatch = (painting) => {
     if (painting.id === painting1.id) {
         MySwal.fire({
             imageUrl: 'https://media.giphy.com/media/flYwljLseVZWE/giphy.gif',
+            text: "They Match!",
             imageWidth: 300,
             imageHeight: 200,
             width: 300,
@@ -91,6 +92,7 @@ putPaintingInPlay = painting => {
         card={card}
         checkMatch={this.checkMatch}
         flippedCards={this.state.cards}
+        inPlay={this.state.paintingInPlay}
         flipCardOnBoard={this.flipCardOnBoard}
         putPaintingInPlay={this.putPaintingInPlay}
        />)}

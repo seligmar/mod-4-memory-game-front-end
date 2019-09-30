@@ -22,7 +22,7 @@
 }
 
 .img {
-  height: 40vmin;
+  height: 34vmin;
   max-width: 100%;
   padding: 10px
 }
@@ -84,4 +84,8 @@
 
 .my-popup-class-no-match {
   padding: 1px; 
+}
+
+.out-of-rotation {
+  background-color: #090526; 
 }

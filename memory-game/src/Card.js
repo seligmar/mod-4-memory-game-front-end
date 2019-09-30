@@ -19,22 +19,22 @@ flipCard = e => {
 
 checkImgToShow = () => {
     if (this.props.removedPaintings.includes(this.props.card)) {
-    return <img src="https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg" className="App-logo" alt="logo" />
+    return <div className="out-of-rotation" > </div>
     }
     if (this.props.flippedCards === 0 && this.state.flippedOver === true) {
         this.setState({flippedOver: false})
       return   <div> <img onClick={e => (this.flipCardAndInitiate(e))} className = "img" src="http://www.thecontemporarychester.com/wp-content/uploads/2016/01/image9.jpg" alt="Make Art Not War artist: Shepard Fairey" /></div> 
     }
-    if (this.state.flippedOver === true && this.props.flippedCards > 1) {
+    if (this.state.flippedOver === true && this.props.flippedCards > 1 && this.props.inPlay[0] === this.props.card) {
         return ( <div className="flipped-card-div"> 
-          <img onClick={e => (this.flipCard(e))} className = "img-flipped" src={this.props.card.image} alt={this.props.card.title} /> 
+          <img className = "img-flipped" src={this.props.card.image} alt={this.props.card.title} /> 
           <p className="details">Title: {this.props.card.title} Artist: {this.props.card.artist.name}</p>
           <button className= "ui mini button blue" onClick={e => this.props.checkMatch(this.props.card)}>Match?</button> 
        
         </div> ) }
      if   (this.state.flippedOver === true) {
       return ( <div className="flipped-card-div"> 
-        <img onClick={e => (this.flipCard(e))} className = "img-flipped" src={this.props.card.image} alt={this.props.card.title} /> 
+        <img className = "img-flipped" src={this.props.card.image} alt={this.props.card.title} /> 
         <p className="details">Title: {this.props.card.title} Artist: {this.props.card.artist.name}</p>
       </div> )
     }

@@ -5,7 +5,6 @@ import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal)
 
-
 let flippedCards = 0
 
 class BoardGame extends React.Component {
@@ -21,6 +20,7 @@ checkMatch = (painting) => {
     if (painting.id === painting1.id) {
         MySwal.fire({
             imageUrl: 'https://media.giphy.com/media/flYwljLseVZWE/giphy.gif',
+            text: "They Match!",
             imageWidth: 300,
             imageHeight: 200,
             width: 300,
@@ -32,16 +32,15 @@ checkMatch = (painting) => {
           })
     this.removePaintings(painting.id)     
     this.setState({paintingInPlay: []})  
-    this.flipAll()    
+    this.endGame()
     this.clearCardCount() }
    else
   { this.setState({paintingInPlay: []}) 
     MySwal.fire({
         imageUrl: 'https://media.giphy.com/media/rYEAkYihZsyWs/giphy.gif',
-        text: "Please click the images to turn them back over", 
         imageWidth: 300,
         imageHeight: 200,
-        confirmButtonText: 'Got it!',
+        confirmButtonText: 'Next!',
         background: '#090526',
         imageAlt: 'Bob Ross',
         padding: '.25em',
@@ -50,15 +49,12 @@ checkMatch = (painting) => {
         animation: false, 
     })
    this.clearCardCount() 
-    this.flipAll()}
-}
+}}
 
 flipCardOnBoard = () => { 
     flippedCards +=1 
     this.setState({ cards: flippedCards})
     }
-
-flipAll = () => true    
 
 clearCardCount = () => {
     flippedCards = 0 
@@ -71,12 +67,19 @@ removePaintings = id => {
     this.setState({removedPaintings: this.state.removedPaintings.concat(newArray)}) 
 }    
 
+endGame = () => {
+    if (this.state.removedPaintings.length === 16) {
+        this.props.endGame()
+    }
+}
+
 putPaintingInPlay = painting => {
     if (flippedCards === 1) {
     this.setState({paintingInPlay: painting}) }
     if (flippedCards === 2) {
         this.setState({paintingInPlay: [painting, this.state.paintingInPlay]}) 
-}}
+}
+}
  
 
     render() {   
@@ -87,10 +90,10 @@ putPaintingInPlay = painting => {
         className="grid-item"
         removedPaintings={this.state.removedPaintings}
         key={card.id} 
-        flipAll={this.flipAll}
         card={card}
         checkMatch={this.checkMatch}
         flippedCards={this.state.cards}
+        inPlay={this.state.paintingInPlay}
         flipCardOnBoard={this.flipCardOnBoard}
         putPaintingInPlay={this.putPaintingInPlay}
        />)}

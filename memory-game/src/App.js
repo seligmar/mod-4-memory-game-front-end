@@ -54,16 +54,9 @@ class App extends React.Component {
 
   shuffle = (array) => {
     let counter = array.length;
-
-    // While there are elements in the array
     while (counter > 0) {
-        // Pick a random index
         let index = Math.floor(Math.random() * counter);
-
-        // Decrease counter by 1
         counter--;
-
-        // And swap the last element with it
         let temp = array[counter];
         array[counter] = array[index];
         array[index] = temp;
@@ -86,6 +79,7 @@ class App extends React.Component {
   startGame = () => {
     this.startTimer()
     this.createNewArray()
+    
   }
 
   startTimer = () => {
@@ -100,7 +94,6 @@ class App extends React.Component {
     clearInterval(this.timerHandle)
     MySwal.fire({
       imageUrl: 'https://media.giphy.com/media/h5AHEcNMhn7u8/giphy.gif',
-      // text: "Please click the images to turn them back over",
       imageWidth: 300,
       imageHeight: 200,
       imageAlt: 'Bob Ross',
@@ -111,6 +104,11 @@ class App extends React.Component {
       confirmButtonColor: 'cornflowerblue',
       width: 300
     })
+    this.setState({ indeciesToPlay: []})
+  }
+
+  endGame = () => {
+    this.endTimer()
   }
 
   render () {
@@ -118,36 +116,32 @@ class App extends React.Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          <Button size='mini' color='orange'>
-            Nice
-          </Button>
           <h1>Welcome to Art Memory!</h1>
           <img
             src='https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg'
             className='App-logo'
             alt='logo'
           />
-          <form>
-            <div>Put log in here</div>
-          </form>
-          <button
-            className='start-page-buttons'
+          <Button size='large' primary
+            className='start-page-buttons' 
             onClick={() => this.startGame()}
           >
             {' '}
             Start Game{' '}
-          </button>
-          <button
-            className='start-page-buttons'
-            onClick={() => this.endTimer()}
+            </Button>
+            <br></br>
+          <Button size='large' primary 
+            className='start-page-buttons' 
+            onClick={() => this.endGame()}
           >
-            {' '}
-            End Game{' '}
-          </button>
+            {'   '}
+            End Game  {'  '}
+            </Button>
           <br />
           <LeaderBoard runtime={this.state.runtime} />
 
           <BoardGame
+           endGame={this.endGame}
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />

@@ -7,6 +7,8 @@ import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal)
 
+//"59bd59dc139b214a3672abe5" is id to remove from db 
+
 let timeElapsed = 0
 // if (index.length === 0) {
 //   endGame(game)}

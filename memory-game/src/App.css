@@ -46,6 +46,7 @@
   text-align: center
 }
 
+
 .question-buttons {
   display: flex;
   align-items: center;
@@ -57,7 +58,7 @@
   align-content: center;
 }
 
-.start-page-buttons {
+.ui.button {
   padding: 10px;
   background-color: aqua;
   background-color: cornflowerblue;
@@ -88,4 +89,8 @@
 
 .out-of-rotation {
   background-color: #090526; 
+}
+
+{
+
 }

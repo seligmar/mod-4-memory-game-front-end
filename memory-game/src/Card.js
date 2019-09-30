@@ -44,7 +44,6 @@ checkImgToShow = () => {
 //}
 
     render() { 
-       // const flippedCards = this.props.flippedCards
         return (
         <div className= "card-div">
             {this.checkImgToShow()} 

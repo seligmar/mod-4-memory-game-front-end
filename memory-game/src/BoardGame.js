@@ -5,7 +5,6 @@ import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal)
 
-
 let flippedCards = 0
 
 class BoardGame extends React.Component {
@@ -33,7 +32,7 @@ checkMatch = (painting) => {
           })
     this.removePaintings(painting.id)     
     this.setState({paintingInPlay: []})  
-    this.flipAll()    
+    this.endGame()
     this.clearCardCount() }
    else
   { this.setState({paintingInPlay: []}) 
@@ -50,15 +49,12 @@ checkMatch = (painting) => {
         animation: false, 
     })
    this.clearCardCount() 
-    this.flipAll()}
-}
+}}
 
 flipCardOnBoard = () => { 
     flippedCards +=1 
     this.setState({ cards: flippedCards})
     }
-
-flipAll = () => true    
 
 clearCardCount = () => {
     flippedCards = 0 
@@ -70,6 +66,12 @@ removePaintings = id => {
     const newArray = cards.filter(filteredPainting => filteredPainting.id === id)    
     this.setState({removedPaintings: this.state.removedPaintings.concat(newArray)}) 
 }    
+
+endGame = () => {
+    if (this.state.removedPaintings.length === 16) {
+        this.props.endGame()
+    }
+}
 
 putPaintingInPlay = painting => {
     if (flippedCards === 1) {
@@ -88,7 +90,6 @@ putPaintingInPlay = painting => {
         className="grid-item"
         removedPaintings={this.state.removedPaintings}
         key={card.id} 
-        flipAll={this.flipAll}
         card={card}
         checkMatch={this.checkMatch}
         flippedCards={this.state.cards}

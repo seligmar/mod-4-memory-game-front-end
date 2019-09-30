@@ -56,7 +56,7 @@ class LeaderBoard extends React.Component {
     return (
       <div id='container'>
         <h1>Leader Board</h1>
-        <h2>Time Elapsed: {this.props.runtime}</h2>
+        <h2 style={{ color: 'red' }}>Time Elapsed: {this.props.runtime}</h2>
         <div class='row'>
           <div class='name'>
             {' '}
@@ -68,12 +68,21 @@ class LeaderBoard extends React.Component {
         </div>
         <br />
         {this.sortedLeaderBoard(this.props.runtime).map(user => {
-          return (
-            <div key={user.user.id} class='row'>
-              <div class='name'>{user.user.username}</div>
-              <div class='score'>{user.user.highScore}</div>
-            </div>
-          )
+          if (user.user.username === 'currentPlayer') {
+            return (
+              <div key={user.user.id} style={{ color: 'green' }} class='row'>
+                <div class='name'> <b><i>{user.user.username}</i></b></div>
+                <div class='score'><b><i>{user.user.highScore}</i></b></div>
+              </div>
+            )
+          } else {
+            return (
+              <div key={user.user.id} class='row'>
+                <div class='name'>{user.user.username}</div>
+                <div class='score'>{user.user.highScore}</div>
+              </div>
+            )
+          }
         })}
       </div>
     )

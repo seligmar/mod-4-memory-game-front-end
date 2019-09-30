@@ -118,7 +118,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          <Button size='massive' primary>
+          <Button size='mini' color='orange'>
             Nice
           </Button>
           <h1>Welcome to Art Memory!</h1>

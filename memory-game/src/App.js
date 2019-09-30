@@ -46,8 +46,27 @@ class App extends React.Component {
   createNewArray = () => {
     // this is the function to call on click of 'start game'
     let newArray = this.setNewArrayofPaintings()
-    const indeciesToPlay = newArray.concat(...newArray)
-    this.setState({ indeciesToPlay })
+    const arrayOf16 = newArray.concat(...newArray)
+    this.shuffle(arrayOf16)
+  }
+
+  shuffle = (array) => {
+    let counter = array.length;
+
+    // While there are elements in the array
+    while (counter > 0) {
+        // Pick a random index
+        let index = Math.floor(Math.random() * counter);
+
+        // Decrease counter by 1
+        counter--;
+
+        // And swap the last element with it
+        let temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+    this.setState({ indeciesToPlay: array })
   }
 
   paintingsToPass = () => {

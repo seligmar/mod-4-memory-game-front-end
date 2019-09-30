@@ -68,7 +68,7 @@ clearCardCount = () => {
 removePaintings = id => {
     const cards = this.props.paintingsToPass
     const newArray = cards.filter(filteredPainting => filteredPainting.id === id)    
-    this.setState({removedPaintings: [newArray, this.state.removedPaintings]}) 
+    this.setState({removedPaintings: this.state.removedPaintings.concat(newArray)}) 
 }    
 
 putPaintingInPlay = painting => {

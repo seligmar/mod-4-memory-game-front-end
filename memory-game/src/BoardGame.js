@@ -32,7 +32,6 @@ checkMatch = (painting) => {
           })
     this.removePaintings(painting.id)     
     this.setState({paintingInPlay: []})  
-    this.endGame()
     this.clearCardCount() }
    else
   { this.setState({paintingInPlay: []}) 
@@ -64,7 +63,7 @@ clearCardCount = () => {
 removePaintings = id => {
     const cards = this.props.paintingsToPass
     const newArray = cards.filter(filteredPainting => filteredPainting.id === id)    
-    this.setState({removedPaintings: this.state.removedPaintings.concat(newArray)}) 
+    this.setState({removedPaintings: this.state.removedPaintings.concat(newArray)}, this.endGame) 
 }    
 
 endGame = () => {
@@ -80,8 +79,6 @@ putPaintingInPlay = painting => {
         this.setState({paintingInPlay: [painting, this.state.paintingInPlay]}) 
 }
 }
- 
-
     render() {   
     const cards = this.props.paintingsToPass  
     return  (

@@ -118,10 +118,6 @@ class App extends React.Component {
             className='App-logo'
             alt='logo'
           />
-          <form>
-            <div>Put log in here</div>
-          </form>
-  
           <Button size='large' primary
             className='start-page-buttons' 
             onClick={() => this.startGame()}

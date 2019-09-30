@@ -107,6 +107,10 @@ class App extends React.Component {
     this.setState({ indeciesToPlay: []})
   }
 
+  endGame = () => {
+    this.endTimer()
+  }
+
   render () {
     let paintingsToPass = this.paintingsToPass()
     return (
@@ -128,7 +132,7 @@ class App extends React.Component {
             <br></br>
           <Button size='large' primary 
             className='start-page-buttons' 
-            onClick={() => this.endTimer()}
+            onClick={() => this.endGame()}
           >
             {'   '}
             End Game  {'  '}
@@ -137,7 +141,7 @@ class App extends React.Component {
           <LeaderBoard runtime={this.state.runtime} />
 
           <BoardGame
-           endTimer={this.endTimer}
+           endGame={this.endGame}
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />

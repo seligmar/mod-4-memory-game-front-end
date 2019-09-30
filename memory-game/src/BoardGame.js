@@ -69,7 +69,7 @@ removePaintings = id => {
 
 endGame = () => {
     if (this.state.removedPaintings.length === 16) {
-        this.props.endTimer()
+        this.props.endGame()
     }
 }
 

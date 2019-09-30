@@ -76,7 +76,8 @@ putPaintingInPlay = painting => {
     this.setState({paintingInPlay: painting}) }
     if (flippedCards === 2) {
         this.setState({paintingInPlay: [painting, this.state.paintingInPlay]}) 
-}}
+}
+}
  
 
     render() {   

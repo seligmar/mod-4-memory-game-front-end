@@ -1,27 +1,25 @@
 import React from 'react'
 import './Login.css'
-
+import LoginLandingPage from './LoginLandingPage'
+import CreateNewUser from './CreateNewUser'
 
 class Login extends React.Component {
+  state = {
+    showCreateNewPage: false
+  }
+
+  sendToCreateNewUserPage = () => {
+    this.setState({ showCreateNewPage: !this.state.showCreateNewPage })
+  }
+
   render () {
-    return (
-      <div className='Login'>
-        <h1>New Game</h1>
-        <form onSubmit={(e) => this.props.loggingIn(e)} class='ui form'>
-          <div style={{ paddingBottom: '10px' }} class='field'>
-            <label>Type in a username to start:</label>
-            <input
-              style={{ width: 200 }}
-              type='text'
-              name='username'
-              placeholder='username'
-            />
-          </div>
-          <button class='ui button' type='submit'>
-            Start Game
-          </button>
-        </form>
-      </div>
+    return this.state.showCreateNewPage ? (
+      <CreateNewUser sendToCreateNewUserPage={this.sendToCreateNewUserPage} />
+    ) : (
+      <LoginLandingPage
+        onHandleSubmit={this.props.onHandleSubmit}
+        sendToCreateNewUserPage={this.sendToCreateNewUserPage}
+      />
     )
   }
 }

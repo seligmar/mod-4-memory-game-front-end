@@ -4,37 +4,44 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import Login from './Login'
+import API from './API'
 
 // const USERSURL = 'http://localhost:3000/users'
 
 class StartApp extends React.Component {
   state = {
-    username: ''
+    username: '',
+    password: ''
   }
 
-  postData = () => {
-    const data = {
-      username: username,
-      password_digest: '123456'
-    }
-    return fetch('http://localhost:3000/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+  signUserInSuccess = () => {
+    API.signIn(this.state).then(data => {
+      if (data.error) {
+        alert(data.error)
+      } else {
+        this.props.history.push('/game')
+      }
     })
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp)
-      })
   }
 
-  loggingIn = e => {
-    // this.postData(e.target.username.value)
+  handleSubmit = e => {
     this.setState(
-      { username: e.target.username.value },
-      this.props.history.push('/game')
+      {
+        username: e.target.username.value,
+        password: e.target.password.value
+      },
+      this.signUserInSuccess
     )
   }
+
+
+  // handleChange = e => {
+  //   e.preventDefault()
+  //   this.setState({
+  //     username: e.target.value,
+  //     password: e.target.value
+  //   })
+  // }
 
   render () {
     return (
@@ -43,7 +50,15 @@ class StartApp extends React.Component {
           exact
           path='/'
           component={props => {
-            return <Login {...props} loggingIn={this.loggingIn} />
+            return (
+              <Login
+                {...props}
+                loggingIn={this.loggingIn}
+                onLoginOnChange={this.handleChange}
+                onHandleSubmit={this.handleSubmit}
+                createNewUserPage={this.createNewUserPage}
+              />
+            )
           }}
         />
         <Route

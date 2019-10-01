@@ -9,9 +9,7 @@ import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
 
-
 const SAVEGAMEURL = 'http://localhost:3001/save-game'
-
 
 const MySwal = withReactContent(Swal)
 
@@ -22,7 +20,7 @@ class App extends React.Component {
     paintings: [],
     indeciesToPlay: [],
     runtime: 0, // set state at end of game and then do patch request
-    timerOn: false
+    showLeaderboard: true
   }
 
   timerHandle = null
@@ -75,6 +73,7 @@ class App extends React.Component {
   startGame = () => {
     this.startTimer()
     this.createNewArray()
+    this.setState({ showLeaderboard: true })
   }
 
   startTimer = () => {
@@ -113,7 +112,7 @@ class App extends React.Component {
     return fetch(SAVEGAMEURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(Newuser)
+      body: JSON.stringify(data)
     })
       .then(resp => resp.json())
       .then(resp => console.log(resp))
@@ -122,6 +121,7 @@ class App extends React.Component {
   endGame = () => {
     this.endTimer()
     this.postData(this.props.currentPlayer, this.state.runtime)
+    this.setState({ showLeaderboard: false })
   }
 
   render () {
@@ -161,10 +161,12 @@ class App extends React.Component {
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />
-          <LeaderBoard
-            runtime={this.state.runtime}
-            currentPlayer={this.props.currentPlayer}
-          />
+          {this.state.showLeaderboard ? (
+            <LeaderBoard
+              runtime={this.state.runtime}
+              currentPlayer={this.props.currentPlayer}
+            />
+          ) : null}
         </header>
       </div>
     )

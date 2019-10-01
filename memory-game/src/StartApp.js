@@ -14,18 +14,26 @@ class StartApp extends React.Component {
 
   postData = () => {
     const data = {
-      username: this.state.username,
-      password_digest: 12345
+      username: username,
+      password_digest: '123456'
     }
     return fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }).then(resp => resp.json())
+    })
+      .then(resp => resp.json())
+      .then(resp => {
+        console.log(resp)
+      })
   }
 
   loggingIn = e => {
-    this.setState({ username: e.target.username.value }, this.postData)
+    // this.postData(e.target.username.value)
+    this.setState(
+      { username: e.target.username.value },
+      this.props.history.push('/game')
+    )
   }
 
   render () {

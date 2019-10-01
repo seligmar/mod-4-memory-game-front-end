@@ -13,11 +13,7 @@ import { Button } from 'semantic-ui-react'
 
 const MySwal = withReactContent(Swal)
 
-// "59bd59dc139b214a3672abe5" is id to remove from db
-
 let timeElapsed = 0
-// if (index.length === 0) {
-//   endGame(game)}
 
 class App extends React.Component {
   state = {
@@ -28,10 +24,6 @@ class App extends React.Component {
   }
 
   timerHandle = null
-
-  // getPaintings = () => {
-  //   return fetch('http://localhost:4000/paintings').then(resp => resp.json())
-  // }
 
   setNewArrayofPaintings = () => {
     const index = [...Array(97).keys()] // this works
@@ -75,7 +67,6 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    // this.getPaintings().then(paintings =>
     this.setState({ paintings })
   }
 

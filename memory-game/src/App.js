@@ -1,11 +1,15 @@
 import React from 'react'
 import './App.css'
+import paintings from './data/paintings'
 import BoardGame from './BoardGame'
 import LeaderBoard from './LeaderBoard'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
+
+// const USERSURL = 'http://localhost:3001/users'
 
 const MySwal = withReactContent(Swal)
 
@@ -25,9 +29,9 @@ class App extends React.Component {
 
   timerHandle = null
 
-  getPaintings = () => {
-    return fetch('http://localhost:3000/paintings').then(resp => resp.json())
-  }
+  // getPaintings = () => {
+  //   return fetch('http://localhost:4000/paintings').then(resp => resp.json())
+  // }
 
   setNewArrayofPaintings = () => {
     const index = [...Array(97).keys()] // this works
@@ -71,7 +75,8 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    this.getPaintings().then(paintings => this.setState({ paintings }))
+    // this.getPaintings().then(paintings =>
+    this.setState({ paintings })
   }
 
   startGame = () => {
@@ -104,8 +109,25 @@ class App extends React.Component {
     this.setState({ indeciesToPlay: [] })
   }
 
+  postData = user => {
+    const Newuser = {
+      username: user,
+      password_digest: 12345
+    }
+    return fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Newuser)
+    })
+      .then(resp => resp.json())
+      .then(resp => console.log(resp))
+  }
+
   endGame = () => {
     this.endTimer()
+    this.postData(this.props.currentPlayer)
+    // .then(resp => resp.json
+    // .then(this.props.history.push('/game'))
   }
 
   render () {
@@ -145,11 +167,14 @@ class App extends React.Component {
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />
-          <LeaderBoard runtime={this.state.runtime} />
+          <LeaderBoard
+            runtime={this.state.runtime}
+            currentPlayer={this.props.currentPlayer}
+          />
         </header>
       </div>
     )
   }
 }
 
-export default App
+export default withRouter(App)

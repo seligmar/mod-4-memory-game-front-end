@@ -1,5 +1,5 @@
 import React from 'react'
-import { resolvePlugin } from '@babel/core'
+// import { resolvePlugin } from '@babel/core'
 import '../src/LeaderBoard.css'
 
 const USERSURL = 'http://localhost:3001/users'
@@ -14,7 +14,7 @@ class LeaderBoard extends React.Component {
     playerTotal: 7,
     user: {
       id: null,
-      username: 'currentPlayer',
+      username: this.props.currentPlayer,
       password_digest: '123456',
       highScore: this.counter
     }
@@ -27,7 +27,11 @@ class LeaderBoard extends React.Component {
   componentDidMount () {
     this.fetchUsers().then(users => {
       if (users.length > 10) {
-        users = users.splice(0, 10)
+        users = users
+          .sort((a, b) => {
+            return a.user.highScore - b.user.highScore
+          })
+          .splice(0, 10)
       }
       this.setState({ leaderArray: users })
     })
@@ -68,7 +72,7 @@ class LeaderBoard extends React.Component {
         </div>
         <br />
         {this.sortedLeaderBoard(this.props.runtime).map(user => {
-          if (user.user.username === 'currentPlayer') {
+          if (user.user.username === this.props.currentPlayer) {
             return (
               <div key={user.user.id} style={{ color: 'green' }} class='row'>
                 <div class='name'>

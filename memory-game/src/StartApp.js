@@ -5,33 +5,27 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import Login from './Login'
 
-const USERSURL = 'http://localhost:3001/users'
+// const USERSURL = 'http://localhost:3000/users'
 
 class StartApp extends React.Component {
   state = {
     username: ''
   }
 
-  postData = username => {
+  postData = () => {
     const data = {
-      username: username,
-      password_digest: ''
+      username: this.state.username,
+      password_digest: 12345
     }
-    return fetch(USERSURL, {
+    return fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    })
+    }).then(resp => resp.json())
   }
 
   loggingIn = e => {
-    this.setState({ username: e.target.username.value })
-    this.postData(this.state.username)
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp)
-        this.props.history.push('/game')
-      })
+    this.setState({ username: e.target.username.value }, this.postData)
   }
 
   render () {

@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import './index.css'
 import paintings from './data/paintings'
 import BoardGame from './BoardGame'
 import LeaderBoard from './LeaderBoard'
@@ -9,9 +10,7 @@ import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
 
-
 const SAVEGAMEURL = 'http://localhost:3001/save-game'
-
 
 const MySwal = withReactContent(Swal)
 
@@ -22,7 +21,7 @@ class App extends React.Component {
     paintings: [],
     indeciesToPlay: [],
     runtime: 0, // set state at end of game and then do patch request
-    timerOn: false
+    showLeaderBoard: false
   }
 
   timerHandle = null
@@ -75,6 +74,7 @@ class App extends React.Component {
   startGame = () => {
     this.startTimer()
     this.createNewArray()
+    this.setState({ showLeaderBoard: true })
   }
 
   startTimer = () => {
@@ -103,7 +103,7 @@ class App extends React.Component {
   }
 
   postData = (username, score) => {
-    const data = {
+    const Newuser = {
       user: {
         username: username,
         password: '123456',
@@ -122,13 +122,14 @@ class App extends React.Component {
   endGame = () => {
     this.endTimer()
     this.postData(this.props.currentPlayer, this.state.runtime)
+    this.setState({ showLeaderBoard: false })
   }
 
   render () {
     const paintingsToPass = this.paintingsToPass()
     return (
       <div className='App'>
-        <header className='App-header'>
+        <div className='App-header'>
           <h1>Welcome to Art Memory!</h1>
           <img
             src='https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg'
@@ -161,11 +162,13 @@ class App extends React.Component {
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />
-          <LeaderBoard
-            runtime={this.state.runtime}
-            currentPlayer={this.props.currentPlayer}
-          />
-        </header>
+          {this.state.showLeaderBoard ? (
+            <LeaderBoard
+              runtime={this.state.runtime}
+              currentPlayer={this.props.currentPlayer}
+            />
+          ) : null}
+        </div>
       </div>
     )
   }

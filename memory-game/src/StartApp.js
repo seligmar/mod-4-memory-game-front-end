@@ -12,7 +12,7 @@ class StartApp extends React.Component {
     username: ''
   }
 
-  postData = () => {
+  postData = username => {
     const data = {
       username: username,
       password_digest: '123456'
@@ -29,7 +29,7 @@ class StartApp extends React.Component {
   }
 
   loggingIn = e => {
-    // this.postData(e.target.username.value)
+    this.postData(e.target.username.value)
     this.setState(
       { username: e.target.username.value },
       this.props.history.push('/game')

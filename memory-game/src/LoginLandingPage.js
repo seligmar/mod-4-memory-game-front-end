@@ -7,7 +7,7 @@ class LoginLandingPage extends React.Component {
       <div className='Login'>
         <h1 style={{ paddingBottom: '10px' }}>Welcome To Memory Masters</h1>
         <form
-          onSubmit={e => this.props.onHandleSubmit(e)}
+          onSubmit={e => this.props.onHandleAuthenticationSubmit(e)}
           style={{ paddingBottom: '40px' }}
           class='ui form'
         >

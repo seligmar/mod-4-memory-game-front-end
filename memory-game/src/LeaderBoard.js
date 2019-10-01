@@ -2,23 +2,15 @@ import React from 'react'
 // import { resolvePlugin } from '@babel/core'
 import '../src/LeaderBoard.css'
 
-const USERSURL = 'http://localhost:3001/users'
+const USERSURL = 'http://localhost:3000/users'
 
 class LeaderBoard extends React.Component {
-  counter = 0
+  counter = 1000
   state = {
     leaderArray: []
   }
 
-  currentPlayer = {
-    playerTotal: 7,
-    user: {
-      id: null,
-      username: this.props.currentPlayer,
-      password_digest: '123456',
-      highScore: this.counter
-    }
-  }
+  currentPlayer = {}
 
   fetchUsers = () => {
     return fetch(USERSURL).then(resp => resp.json())
@@ -50,9 +42,13 @@ class LeaderBoard extends React.Component {
   }
 
   sortedLeaderBoard = time => {
-    this.currentPlayer.user.highScore = time
-    const updatedLeaderArray = [...this.state.leaderArray, this.currentPlayer]
-
+    this.currentPlayer = this.state.leaderArray.find(
+      n => n.user.username === this.props.currentPlayer
+    )
+    if (this.currentPlayer) {
+      this.currentPlayer.user.highScore = time
+    }
+    const updatedLeaderArray = [...this.state.leaderArray]
     return this.doSorting(updatedLeaderArray)
   }
 

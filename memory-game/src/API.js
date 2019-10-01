@@ -1,5 +1,6 @@
-const baseUrl = 'http://localhost:3001'
+const baseUrl = 'http://localhost:3000'
 const signinUrl = baseUrl + '/signin'
+const createUserUrl = baseUrl + '/createUser'
 
 const post = (url, data) => {
   return fetch(url, {
@@ -11,4 +12,6 @@ const post = (url, data) => {
 
 const signIn = user => post(signinUrl, user)
 
-export default { signIn }
+const createNewUser = user => post(createUserUrl, user)
+
+export default { signIn, createNewUser }

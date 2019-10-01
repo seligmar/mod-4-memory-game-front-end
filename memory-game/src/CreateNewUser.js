@@ -7,7 +7,7 @@ class CreateNewUser extends React.Component {
       <div className='Login'>
         <h1 style={{ paddingBottom: '10px' }}>Create Account</h1>
         <form
-          onSubmit={e => this.props.onHandleSubmit(e)}
+          onSubmit={e => this.props.onHandleNewUserCreationSubmit(e)}
           style={{ paddingBottom: '40px' }}
           class='ui form'
         >

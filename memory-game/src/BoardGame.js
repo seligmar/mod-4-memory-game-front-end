@@ -88,6 +88,7 @@ class BoardGame extends React.Component {
 
   render () {
     const cards = this.props.paintingsToPass
+
     return (
       <div className='grid-container'>
         {cards.map(card => (

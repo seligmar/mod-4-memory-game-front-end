@@ -119,6 +119,7 @@ class App extends React.Component {
             className='App-logo'
             alt='logo'
           />
+          <br />
           <Button
             size='large'
             primary
@@ -139,13 +140,12 @@ class App extends React.Component {
             End Game {'  '}
           </Button>
           <br />
-          <LeaderBoard runtime={this.state.runtime} />
-
           <BoardGame
             endGame={this.endGame}
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />
+          <LeaderBoard runtime={this.state.runtime} />
         </header>
       </div>
     )

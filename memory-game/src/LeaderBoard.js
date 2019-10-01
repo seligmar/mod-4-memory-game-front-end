@@ -71,8 +71,17 @@ class LeaderBoard extends React.Component {
           if (user.user.username === 'currentPlayer') {
             return (
               <div key={user.user.id} style={{ color: 'green' }} class='row'>
-                <div class='name'> <b><i>{user.user.username}</i></b></div>
-                <div class='score'><b><i>{user.user.highScore}</i></b></div>
+                <div class='name'>
+                  {' '}
+                  <b>
+                    <i>{user.user.username}</i>
+                  </b>
+                </div>
+                <div class='score'>
+                  <b>
+                    <i>{user.user.highScore}</i>
+                  </b>
+                </div>
               </div>
             )
           } else {

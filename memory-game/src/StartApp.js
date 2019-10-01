@@ -5,19 +5,19 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import Login from './Login'
 
-const USERSURL = 'http://localhost:3001/users'
+// const USERSURL = 'http://localhost:3000/users'
 
 class StartApp extends React.Component {
   state = {
     username: ''
   }
 
-  postData = username => {
+  postData = () => {
     const data = {
       username: username,
       password_digest: '123456'
     }
-    return fetch(USERSURL, {
+    return fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)

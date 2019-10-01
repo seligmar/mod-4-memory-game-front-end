@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import paintings from './data/paintings'
 import BoardGame from './BoardGame'
 import LeaderBoard from './LeaderBoard'
 import Swal from 'sweetalert2'
@@ -8,15 +9,13 @@ import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
 
+
 const SAVEGAMEURL = 'http://localhost:3001/save-game'
+
 
 const MySwal = withReactContent(Swal)
 
-// "59bd59dc139b214a3672abe5" is id to remove from db
-
 let timeElapsed = 0
-// if (index.length === 0) {
-//   endGame(game)}
 
 class App extends React.Component {
   state = {
@@ -28,13 +27,9 @@ class App extends React.Component {
 
   timerHandle = null
 
-  getPaintings = () => {
-    return fetch('http://localhost:3000/paintings').then(resp => resp.json())
-  }
-
   setNewArrayofPaintings = () => {
     const index = [...Array(97).keys()] // this works
-    let newArray = []
+    const newArray = []
     var i = 0
     while (i < 8) {
       var rand = index[Math.floor(Math.random() * index.length)] // this works
@@ -50,7 +45,7 @@ class App extends React.Component {
 
   createNewArray = () => {
     // this is the function to call on click of 'start game'
-    let newArray = this.setNewArrayofPaintings()
+    const newArray = this.setNewArrayofPaintings()
     const arrayOf16 = newArray.concat(...newArray)
     this.shuffle(arrayOf16)
   }
@@ -58,9 +53,9 @@ class App extends React.Component {
   shuffle = array => {
     let counter = array.length
     while (counter > 0) {
-      let index = Math.floor(Math.random() * counter)
+      const index = Math.floor(Math.random() * counter)
       counter--
-      let temp = array[counter]
+      const temp = array[counter]
       array[counter] = array[index]
       array[index] = temp
     }
@@ -68,15 +63,13 @@ class App extends React.Component {
   }
 
   paintingsToPass = () => {
-    let indecies = this.state.indeciesToPlay
-    let paintings = this.state.paintings
+    const indecies = this.state.indeciesToPlay
+    const paintings = this.state.paintings
     return indecies.map(index => paintings[index])
   }
 
   componentDidMount () {
-    this.getPaintings().then(paintings => this.setState({ paintings }))
-    // magical code to ensure
-    // this things happen when i want them to happen
+    this.setState({ paintings })
   }
 
   startGame = () => {
@@ -120,7 +113,7 @@ class App extends React.Component {
     return fetch(SAVEGAMEURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(Newuser)
     })
       .then(resp => resp.json())
       .then(resp => console.log(resp))
@@ -132,7 +125,7 @@ class App extends React.Component {
   }
 
   render () {
-    let paintingsToPass = this.paintingsToPass()
+    const paintingsToPass = this.paintingsToPass()
     return (
       <div className='App'>
         <header className='App-header'>
@@ -142,6 +135,7 @@ class App extends React.Component {
             className='App-logo'
             alt='logo'
           />
+          <br />
           <Button
             size='large'
             primary
@@ -162,15 +156,14 @@ class App extends React.Component {
             End Game {'  '}
           </Button>
           <br />
-          <LeaderBoard
-            runtime={this.state.runtime}
-            currentPlayer={this.props.currentPlayer}
-          />
-
           <BoardGame
             endGame={this.endGame}
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
+          />
+          <LeaderBoard
+            runtime={this.state.runtime}
+            currentPlayer={this.props.currentPlayer}
           />
         </header>
       </div>

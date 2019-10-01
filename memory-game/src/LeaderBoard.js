@@ -1,5 +1,5 @@
 import React from 'react'
-import { resolvePlugin } from '@babel/core'
+// import { resolvePlugin } from '@babel/core'
 import '../src/LeaderBoard.css'
 
 const USERSURL = 'http://localhost:3001/users'
@@ -76,8 +76,9 @@ class LeaderBoard extends React.Component {
             return (
               <div key={user.user.id} style={{ color: 'green' }} class='row'>
                 <div class='name'>
+                  {' '}
                   <b>
-                    <i>{this.props.currentPlayer}</i>
+                    <i>{user.user.username}</i>
                   </b>
                 </div>
                 <div class='score'>

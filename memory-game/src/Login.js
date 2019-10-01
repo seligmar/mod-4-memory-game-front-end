@@ -14,10 +14,13 @@ class Login extends React.Component {
 
   render () {
     return this.state.showCreateNewPage ? (
-      <CreateNewUser sendToCreateNewUserPage={this.sendToCreateNewUserPage} />
+      <CreateNewUser
+        onHandleNewUserCreationSubmit={this.props.onHandleNewUserCreationSubmit}
+        sendToCreateNewUserPage={this.sendToCreateNewUserPage}
+      />
     ) : (
       <LoginLandingPage
-        onHandleSubmit={this.props.onHandleSubmit}
+        onHandleAuthenticationSubmit={this.props.onHandleAuthenticationSubmit}
         sendToCreateNewUserPage={this.sendToCreateNewUserPage}
       />
     )

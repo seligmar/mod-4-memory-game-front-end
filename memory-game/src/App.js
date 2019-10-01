@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
 
-const SAVEGAMEURL = 'http://localhost:3001/save-game'
+const SAVEGAMEURL = 'http://localhost:3000/save-game'
 
 const MySwal = withReactContent(Swal)
 
@@ -77,7 +77,7 @@ class App extends React.Component {
   }
 
   startTimer = () => {
-    this.setState({ timerOn: true })
+    this.setState({ runtime: 0, timerOn: true })
     this.timerHandle = setInterval(() => {
       timeElapsed += 1
       this.setState({ runtime: timeElapsed })
@@ -124,6 +124,11 @@ class App extends React.Component {
     this.setState({ showLeaderboard: false })
   }
 
+  quitApp = () => {
+    clearInterval(this.timerHandle)
+    this.props.history.push('/')
+  }
+
   render () {
     const paintingsToPass = this.paintingsToPass()
     return (
@@ -150,7 +155,7 @@ class App extends React.Component {
             size='large'
             primary
             className='start-page-buttons'
-            onClick={() => this.endGame()}
+            onClick={() => this.quitApp()}
           >
             {'   '}
             End Game {'  '}

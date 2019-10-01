@@ -24,7 +24,17 @@ class StartApp extends React.Component {
     })
   }
 
-  handleSubmit = e => {
+  createUser = () => {
+    API.createNewUser(this.state).then(data => {
+      if (data.error) {
+        alert(data.error)
+      } else {
+        this.props.history.push('/game')
+      }
+    })
+  }
+
+  handleAuthenticationSubmit = e => {
     this.setState(
       {
         username: e.target.username.value,
@@ -34,14 +44,16 @@ class StartApp extends React.Component {
     )
   }
 
-
-  // handleChange = e => {
-  //   e.preventDefault()
-  //   this.setState({
-  //     username: e.target.value,
-  //     password: e.target.value
-  //   })
-  // }
+  handleNewUserCreationSubmit = e => {
+    e.preventDefault()
+    this.setState(
+      {
+        username: e.target.username.value,
+        password: e.target.password.value
+      },
+      this.createUser
+    )
+  }
 
   render () {
     return (
@@ -54,8 +66,8 @@ class StartApp extends React.Component {
               <Login
                 {...props}
                 loggingIn={this.loggingIn}
-                onLoginOnChange={this.handleChange}
-                onHandleSubmit={this.handleSubmit}
+                onHandleAuthenticationSubmit={this.handleAuthenticationSubmit}
+                onHandleNewUserCreationSubmit={this.handleNewUserCreationSubmit}
                 createNewUserPage={this.createNewUserPage}
               />
             )

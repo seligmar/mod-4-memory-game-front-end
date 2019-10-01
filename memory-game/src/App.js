@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
 
-const USERSURL = 'http://localhost:3001/users'
+const SAVEGAMEURL = 'http://localhost:3001/save-game'
 
 const MySwal = withReactContent(Swal)
 
@@ -111,15 +111,13 @@ class App extends React.Component {
 
   postData = (username, score) => {
     const data = {
-      playerTotal: 7,
       user: {
-        id: 8,
         username: username,
-        password_digest: null,
+        password: '123456',
         highScore: score
       }
     }
-    return fetch(USERSURL, {
+    return fetch(SAVEGAMEURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -131,8 +129,6 @@ class App extends React.Component {
   endGame = () => {
     this.endTimer()
     this.postData(this.props.currentPlayer, this.state.runtime)
-    // .then(resp => resp.json
-    // .then(this.props.history.push('/game'))
   }
 
   render () {

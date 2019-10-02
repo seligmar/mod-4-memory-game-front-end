@@ -54,10 +54,12 @@ class LeaderBoard extends React.Component {
 
   render () {
     return (
-      <div style={{ backgroundColor: '#030112' }} id='container'>
-        <h1>Leader Board</h1>
-        <h2 style={{ color: 'red' }}>Time Elapsed: {this.props.runtime}</h2>
-        <div class='row'>
+      <div className='leader-board-grid-container' id='container'>
+        <div className='left'>
+          <h1>Leader Board</h1>
+          <h2 style={{ color: 'red' }}>Time Elapsed: {this.props.runtime}</h2>
+        </div>
+        <div className='grid-right'>
           <div class='name'>
             {' '}
             <b>Username</b>
@@ -86,9 +88,9 @@ class LeaderBoard extends React.Component {
             )
           } else {
             return (
-              <div key={user.user.id} class='row'>
-                <div class='name'>{user.user.username}</div>
-                <div class='score'>{user.user.highScore}</div>
+              <div key={user.user.id} className='row'>
+                <div className='name'>{user.user.username}</div>
+                <div className='score'>{user.user.highScore}</div>
               </div>
             )
           }

@@ -10,11 +10,7 @@ import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
 
-<<<<<<< HEAD
-const SAVEGAMEURL = 'http://localhost:3001/save-game'
-=======
 const SAVEGAMEURL = 'http://localhost:3000/save-game'
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
 
 const MySwal = withReactContent(Swal)
 
@@ -25,11 +21,7 @@ class App extends React.Component {
     paintings: [],
     indeciesToPlay: [],
     runtime: 0, // set state at end of game and then do patch request
-<<<<<<< HEAD
-    showLeaderBoard: false
-=======
     showLeaderboard: true
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
   }
 
   timerHandle = null
@@ -82,11 +74,7 @@ class App extends React.Component {
   startGame = () => {
     this.startTimer()
     this.createNewArray()
-<<<<<<< HEAD
-    this.setState({ showLeaderBoard: true })
-=======
     this.setState({ showLeaderboard: true })
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
   }
 
   startTimer = () => {
@@ -125,7 +113,7 @@ class App extends React.Component {
     return fetch(SAVEGAMEURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(Newuser)
     })
       .then(resp => resp.json())
       .then(resp => console.log(resp))
@@ -145,55 +133,44 @@ class App extends React.Component {
   render () {
     const paintingsToPass = this.paintingsToPass()
     return (
-      <div className='App'>
-        <div className='App-header'>
-          <h1>Welcome to Art Memory!</h1>
-          <img
+      <div className='App-header'>
+        {/* <img
             src='https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg'
             className='App-logo'
             alt='logo'
+          /> */}
+        {this.state.showLeaderboard ? (
+          <LeaderBoard
+            runtime={this.state.runtime}
+            currentPlayer={this.props.currentPlayer}
           />
-          <br />
-          <Button
-            size='large'
-            primary
-            className='start-page-buttons'
-            onClick={() => this.startGame()}
-          >
-            {' '}
-            Start Game{' '}
-          </Button>
-          <br />
-          <Button
-            size='large'
-            primary
-            className='start-page-buttons'
-            onClick={() => this.quitApp()}
-          >
-            {'   '}
-            End Game {'  '}
-          </Button>
-          <br />
-          <BoardGame
-            endGame={this.endGame}
-            paintingsToPass={paintingsToPass}
-            createNewArray={this.createNewArray}
-          />
-<<<<<<< HEAD
-          {this.state.showLeaderBoard ? (
-=======
-          {this.state.showLeaderboard ? (
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
-            <LeaderBoard
-              runtime={this.state.runtime}
-              currentPlayer={this.props.currentPlayer}
-            />
-          ) : null}
-<<<<<<< HEAD
-        </div>
-=======
-        </header>
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
+        ) : null}
+        <br />
+        <Button
+          size='large'
+          primary
+          className='start-page-buttons'
+          onClick={() => this.startGame()}
+        >
+          {' '}
+          Start Game{' '}
+        </Button>
+        <br />
+        <Button
+          size='large'
+          primary
+          className='start-page-buttons'
+          onClick={() => this.quitApp()}
+        >
+          {'   '}
+          End Game {'  '}
+        </Button>
+        <br />
+        <BoardGame
+          endGame={this.endGame}
+          paintingsToPass={paintingsToPass}
+          createNewArray={this.createNewArray}
+        />
       </div>
     )
   }

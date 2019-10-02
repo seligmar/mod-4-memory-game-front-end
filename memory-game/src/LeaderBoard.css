@@ -1,10 +1,29 @@
 #container {
-	width: 350px;
+	width: 915px;
     height: auto;
     border-style: solid;
-    border-width: 7px;
-	border-color: white;
-	padding: 50px 50px 50px 50px;
+    border-width: 1px;
+		border-color: white;
+	 /* padding: 50px 50px 50px 50px;  */
+}
+
+.leader-board-grid-container {
+	display: grid;
+	background-color: '#030112';
+	grid-template-areas: left right; 
+}
+
+
+.left { 
+	grid-area: left; 
+	text-align: center; 
+	grid-row: 1 / 12;
+	border-left: 1px solid #AFAFAF;
+}
+
+.right {
+	grid-area: right;
+	border-bottom: 1px solid #AFAFAF;
 }
 
 
@@ -12,18 +31,20 @@
 	position: relative;
 	display: block;
 	width: 100%;
-	height: 40px;
-	border-bottom: 1px solid #AFAFAF;
+	height: 20px;
+	border-top: 1px solid #AFAFAF;
 }
 
 .name {
+	font-size: 14px;
 	position: relative;
 	display: inline-block;
 	width: 50%;
-	line-height: 45px;
+	line-height: 20px;
 }
 
 .score {
+	font-size: 14px;
 	position: relative;
 	display: inline-block;
 	width: 50%;

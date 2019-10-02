@@ -134,16 +134,12 @@ class App extends React.Component {
   endGame = () => {
     this.endTimer()
     this.postData(this.props.currentPlayer, this.state.runtime)
-<<<<<<< HEAD
-    this.setState({ showLeaderBoard: false })
-=======
     this.setState({ showLeaderboard: false })
   }
 
   quitApp = () => {
     clearInterval(this.timerHandle)
     this.props.history.push('/')
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
   }
 
   render () {

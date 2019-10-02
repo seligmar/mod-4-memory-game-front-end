@@ -20,7 +20,7 @@ class App extends React.Component {
     paintings: [],
     indeciesToPlay: [],
     runtime: 0, // set state at end of game and then do patch request
-    showLeaderboard: true
+    showStartGameButton: true
   }
 
   timerHandle = null
@@ -105,7 +105,6 @@ class App extends React.Component {
     const data = {
       user: {
         username: username,
-        password: '123456',
         highScore: score
       }
     }
@@ -119,14 +118,18 @@ class App extends React.Component {
   }
 
   endGame = () => {
+    this.setState({ showStartGameButton: false })
     this.endTimer()
     this.postData(this.props.currentPlayer, this.state.runtime)
-    this.setState({ showLeaderboard: false })
   }
 
   quitApp = () => {
-    clearInterval(this.timerHandle)
-    this.props.history.push('/')
+    if (this.timerHandle === null) {
+      this.props.history.push('/')
+    } else {
+      clearInterval(this.timerHandle)
+      this.props.history.push('/')
+    }
   }
 
   render () {
@@ -141,15 +144,17 @@ class App extends React.Component {
             alt='logo'
           />
           <br />
-          <Button
-            size='large'
-            primary
-            className='start-page-buttons'
-            onClick={() => this.startGame()}
-          >
-            {' '}
-            Start Game{' '}
-          </Button>
+          {this.state.showStartGameButton ? (
+            <Button
+              size='large'
+              primary
+              className='start-page-buttons'
+              onClick={() => this.startGame()}
+            >
+              {' '}
+              Start Game{' '}
+            </Button>
+          ) : <h2>CONGRATS, THANKS FOR PLAYING :)</h2>}
           <br />
           <Button
             size='large'
@@ -158,7 +163,7 @@ class App extends React.Component {
             onClick={() => this.quitApp()}
           >
             {'   '}
-            End Game {'  '}
+            Logout {'  '}
           </Button>
           <br />
           <BoardGame
@@ -166,12 +171,10 @@ class App extends React.Component {
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />
-          {this.state.showLeaderboard ? (
-            <LeaderBoard
-              runtime={this.state.runtime}
-              currentPlayer={this.props.currentPlayer}
-            />
-          ) : null}
+          <LeaderBoard
+            runtime={this.state.runtime}
+            currentPlayer={this.props.currentPlayer}
+          />
         </header>
       </div>
     )

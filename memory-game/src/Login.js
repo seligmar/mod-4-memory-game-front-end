@@ -1,5 +1,6 @@
 import React from 'react'
 import './Login.css'
+import './App.css'
 import LoginLandingPage from './LoginLandingPage'
 import CreateNewUser from './CreateNewUser'
 

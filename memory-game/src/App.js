@@ -10,12 +10,6 @@ import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
 
-<<<<<<< HEAD
-const SAVEGAMEURL = 'http://localhost:3001/save-game'
-=======
-const SAVEGAMEURL = 'http://localhost:3000/save-game'
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
-
 const MySwal = withReactContent(Swal)
 
 let timeElapsed = 0
@@ -25,11 +19,8 @@ class App extends React.Component {
     paintings: [],
     indeciesToPlay: [],
     runtime: 0, // set state at end of game and then do patch request
-<<<<<<< HEAD
-    showLeaderBoard: false
-=======
-    showLeaderboard: true
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
+    showStartGameButton: true
+
   }
 
   timerHandle = null
@@ -82,11 +73,6 @@ class App extends React.Component {
   startGame = () => {
     this.startTimer()
     this.createNewArray()
-<<<<<<< HEAD
-    this.setState({ showLeaderBoard: true })
-=======
-    this.setState({ showLeaderboard: true })
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
   }
 
   startTimer = () => {
@@ -118,7 +104,6 @@ class App extends React.Component {
     const Newuser = {
       user: {
         username: username,
-        password: '123456',
         highScore: score
       }
     }
@@ -132,14 +117,18 @@ class App extends React.Component {
   }
 
   endGame = () => {
+    this.setState({ showStartGameButton: false })
     this.endTimer()
     this.postData(this.props.currentPlayer, this.state.runtime)
-    this.setState({ showLeaderboard: false })
   }
 
   quitApp = () => {
-    clearInterval(this.timerHandle)
-    this.props.history.push('/')
+    if (this.timerHandle === null) {
+      this.props.history.push('/')
+    } else {
+      clearInterval(this.timerHandle)
+      this.props.history.push('/')
+    }
   }
 
   render () {
@@ -154,15 +143,17 @@ class App extends React.Component {
             alt='logo'
           />
           <br />
-          <Button
-            size='large'
-            primary
-            className='start-page-buttons'
-            onClick={() => this.startGame()}
-          >
-            {' '}
-            Start Game{' '}
-          </Button>
+          {this.state.showStartGameButton ? (
+            <Button
+              size='large'
+              primary
+              className='start-page-buttons'
+              onClick={() => this.startGame()}
+            >
+              {' '}
+              Start Game{' '}
+            </Button>
+          ) : <h2>CONGRATS, THANKS FOR PLAYING :)</h2>}
           <br />
           <Button
             size='large'
@@ -171,7 +162,7 @@ class App extends React.Component {
             onClick={() => this.quitApp()}
           >
             {'   '}
-            End Game {'  '}
+            Logout {'  '}
           </Button>
           <br />
           <BoardGame
@@ -179,21 +170,12 @@ class App extends React.Component {
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />
-<<<<<<< HEAD
-          {this.state.showLeaderBoard ? (
-=======
-          {this.state.showLeaderboard ? (
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
             <LeaderBoard
               runtime={this.state.runtime}
               currentPlayer={this.props.currentPlayer}
             />
           ) : null}
-<<<<<<< HEAD
-        </div>
-=======
         </header>
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
       </div>
     )
   }

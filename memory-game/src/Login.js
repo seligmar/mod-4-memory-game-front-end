@@ -1,12 +1,11 @@
 import React from 'react'
 import './index.css'
 import './Login.css'
-<<<<<<< HEAD
 import './App.css'
-=======
+
 import LoginLandingPage from './LoginLandingPage'
 import CreateNewUser from './CreateNewUser'
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
+
 
 class Login extends React.Component {
   state = {
@@ -18,7 +17,7 @@ class Login extends React.Component {
   }
 
   render () {
-<<<<<<< HEAD
+
     return (
       <div className='App-header'>
         <div className='Login'>
@@ -39,7 +38,6 @@ class Login extends React.Component {
           </form>
         </div>
       </div>
-=======
     return this.state.showCreateNewPage ? (
       <CreateNewUser
         onHandleNewUserCreationSubmit={this.props.onHandleNewUserCreationSubmit}
@@ -50,7 +48,7 @@ class Login extends React.Component {
         onHandleAuthenticationSubmit={this.props.onHandleAuthenticationSubmit}
         sendToCreateNewUserPage={this.sendToCreateNewUserPage}
       />
->>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
+
     )
   }
 }

@@ -18,12 +18,12 @@ class LeaderBoard extends React.Component {
 
   componentDidMount () {
     this.fetchUsers().then(users => {
-      if (users.length > 10) {
-        users = users
-          .sort((a, b) => {
-            return a.user.highScore - b.user.highScore
-          })
-          .splice(0, 10)
+      if (users.length > 5) {
+        users = users.sort((a, b) => {
+          return a.user.highScore - b.user.highScore
+        })
+        users = users.slice(0, 5)
+        this.setState({ leaderArray: users })
       }
       this.setState({ leaderArray: users })
     })

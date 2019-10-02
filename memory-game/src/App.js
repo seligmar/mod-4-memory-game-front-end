@@ -10,8 +10,11 @@ import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
 
+<<<<<<< HEAD
 const SAVEGAMEURL = 'http://localhost:3000/save-game'
 
+=======
+>>>>>>> 4c9afbc6c8b4f990f809ad1d2e40d525b6f24d88
 const MySwal = withReactContent(Swal)
 
 let timeElapsed = 0
@@ -21,7 +24,12 @@ class App extends React.Component {
     paintings: [],
     indeciesToPlay: [],
     runtime: 0, // set state at end of game and then do patch request
+<<<<<<< HEAD
     showLeaderboard: true
+=======
+    showStartGameButton: true
+
+>>>>>>> 4c9afbc6c8b4f990f809ad1d2e40d525b6f24d88
   }
 
   timerHandle = null
@@ -74,7 +82,10 @@ class App extends React.Component {
   startGame = () => {
     this.startTimer()
     this.createNewArray()
+<<<<<<< HEAD
     this.setState({ showLeaderboard: true })
+=======
+>>>>>>> 4c9afbc6c8b4f990f809ad1d2e40d525b6f24d88
   }
 
   startTimer = () => {
@@ -106,7 +117,6 @@ class App extends React.Component {
     const Newuser = {
       user: {
         username: username,
-        password: '123456',
         highScore: score
       }
     }
@@ -120,59 +130,63 @@ class App extends React.Component {
   }
 
   endGame = () => {
+    this.setState({ showStartGameButton: false })
     this.endTimer()
     this.postData(this.props.currentPlayer, this.state.runtime)
+<<<<<<< HEAD
     this.setState({ showLeaderboard: false })
     //  this.props.history.push('/')
+=======
+>>>>>>> 4c9afbc6c8b4f990f809ad1d2e40d525b6f24d88
   }
 
   quitApp = () => {
-    clearInterval(this.timerHandle)
-    this.props.history.push('/')
+    if (this.timerHandle === null) {
+      this.props.history.push('/')
+    } else {
+      clearInterval(this.timerHandle)
+      this.props.history.push('/')
+    }
   }
 
   render () {
     const paintingsToPass = this.paintingsToPass()
     return (
       <div className='App-header'>
-        {/* <img
-            src='https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg'
-            className='App-logo'
-            alt='logo'
-          /> */}
-        {/* {this.state.showLeaderboard ? ( */}
-        <LeaderBoard
-          runtime={this.state.runtime}
-          currentPlayer={this.props.currentPlayer}
-        />
-        {/* // )
-        //  : null} */}
-        <br />
-        <Button
-          size='large'
-          primary
-          className='start-page-buttons'
-          onClick={() => this.startGame()}
-        >
-          {' '}
-          Start Game{' '}
-        </Button>
-        <br />
-        <Button
-          size='large'
-          primary
-          className='start-page-buttons'
-          onClick={() => this.quitApp()}
-        >
-          {'   '}
-          End Game {'  '}
-        </Button>
-        <br />
-        <BoardGame
-          endGame={this.endGame}
-          paintingsToPass={paintingsToPass}
-          createNewArray={this.createNewArray}
-        />
+          <br />
+          {this.state.showStartGameButton ? (
+            <Button
+              size='large'
+              primary
+              className='start-page-buttons'
+              onClick={() => this.startGame()}
+            >
+              {' '}
+              Start Game{' '}
+            </Button>
+          ) : <h2>CONGRATS, THANKS FOR PLAYING :)</h2>}
+          <br />
+          <Button
+            size='large'
+            primary
+            className='start-page-buttons'
+            onClick={() => this.quitApp()}
+          >
+            {'   '}
+            Logout {'  '}
+          </Button>
+          <br />
+          <BoardGame
+            endGame={this.endGame}
+            paintingsToPass={paintingsToPass}
+            createNewArray={this.createNewArray}
+          />
+            <LeaderBoard
+              runtime={this.state.runtime}
+              currentPlayer={this.props.currentPlayer}
+            />
+          ) : null}
+        </header>
       </div>
     )
   }

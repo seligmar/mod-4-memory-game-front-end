@@ -14,6 +14,17 @@ class StartApp extends React.Component {
     password: ''
   }
 
+<<<<<<< HEAD
+  postData = username => {
+    const data = {
+      username: username,
+      password_digest: '123456'
+    }
+    return fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+=======
   signUserInSuccess = () => {
     API.signIn(this.state).then(data => {
       if (data.error) {
@@ -21,9 +32,14 @@ class StartApp extends React.Component {
       } else {
         this.props.history.push('/game')
       }
+>>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
     })
   }
 
+<<<<<<< HEAD
+  loggingIn = e => {
+    this.postData(e.target.username.value)
+=======
   createUser = () => {
     API.createNewUser(this.state).then(data => {
       if (data.error) {
@@ -46,6 +62,7 @@ class StartApp extends React.Component {
 
   handleNewUserCreationSubmit = e => {
     e.preventDefault()
+>>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
     this.setState(
       {
         username: e.target.username.value,

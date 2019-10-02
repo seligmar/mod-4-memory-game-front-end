@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import './index.css'
 import paintings from './data/paintings'
 import BoardGame from './BoardGame'
 import LeaderBoard from './LeaderBoard'
@@ -8,8 +9,6 @@ import withReactContent from 'sweetalert2-react-content'
 import { withRouter } from 'react-router-dom'
 
 import { Button } from 'semantic-ui-react'
-
-const SAVEGAMEURL = 'http://localhost:3000/save-game'
 
 const MySwal = withReactContent(Swal)
 
@@ -21,6 +20,7 @@ class App extends React.Component {
     indeciesToPlay: [],
     runtime: 0, // set state at end of game and then do patch request
     showStartGameButton: true
+
   }
 
   timerHandle = null
@@ -73,7 +73,6 @@ class App extends React.Component {
   startGame = () => {
     this.startTimer()
     this.createNewArray()
-    this.setState({ showLeaderboard: true })
   }
 
   startTimer = () => {
@@ -102,7 +101,7 @@ class App extends React.Component {
   }
 
   postData = (username, score) => {
-    const data = {
+    const Newuser = {
       user: {
         username: username,
         highScore: score
@@ -136,7 +135,7 @@ class App extends React.Component {
     const paintingsToPass = this.paintingsToPass()
     return (
       <div className='App'>
-        <header className='App-header'>
+        <div className='App-header'>
           <h1>Welcome to Art Memory!</h1>
           <img
             src='https://d32dm0rphc51dk.cloudfront.net/pdRjIGw58ecojporcDG0_w/medium.jpg'
@@ -171,10 +170,11 @@ class App extends React.Component {
             paintingsToPass={paintingsToPass}
             createNewArray={this.createNewArray}
           />
-          <LeaderBoard
-            runtime={this.state.runtime}
-            currentPlayer={this.props.currentPlayer}
-          />
+            <LeaderBoard
+              runtime={this.state.runtime}
+              currentPlayer={this.props.currentPlayer}
+            />
+          ) : null}
         </header>
       </div>
     )

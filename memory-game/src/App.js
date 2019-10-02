@@ -123,6 +123,7 @@ class App extends React.Component {
     this.endTimer()
     this.postData(this.props.currentPlayer, this.state.runtime)
     this.setState({ showLeaderboard: false })
+    //  this.props.history.push('/')
   }
 
   quitApp = () => {
@@ -139,12 +140,13 @@ class App extends React.Component {
             className='App-logo'
             alt='logo'
           /> */}
-        {this.state.showLeaderboard ? (
-          <LeaderBoard
-            runtime={this.state.runtime}
-            currentPlayer={this.props.currentPlayer}
-          />
-        ) : null}
+        {/* {this.state.showLeaderboard ? ( */}
+        <LeaderBoard
+          runtime={this.state.runtime}
+          currentPlayer={this.props.currentPlayer}
+        />
+        {/* // )
+        //  : null} */}
         <br />
         <Button
           size='large'

@@ -4,14 +4,17 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import Login from './Login'
+import API from './API'
 
 // const USERSURL = 'http://localhost:3000/users'
 
 class StartApp extends React.Component {
   state = {
-    username: ''
+    username: '',
+    password: ''
   }
 
+<<<<<<< HEAD
   postData = username => {
     const data = {
       username: username,
@@ -21,18 +24,51 @@ class StartApp extends React.Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
+=======
+  signUserInSuccess = () => {
+    API.signIn(this.state).then(data => {
+      if (data.error) {
+        alert(data.error)
+      } else {
+        this.props.history.push('/game')
+      }
+>>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
     })
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp)
-      })
   }
 
+<<<<<<< HEAD
   loggingIn = e => {
     this.postData(e.target.username.value)
+=======
+  createUser = () => {
+    API.createNewUser(this.state).then(data => {
+      if (data.error) {
+        alert(data.error)
+      } else {
+        this.props.history.push('/game')
+      }
+    })
+  }
+
+  handleAuthenticationSubmit = e => {
     this.setState(
-      { username: e.target.username.value },
-      this.props.history.push('/game')
+      {
+        username: e.target.username.value,
+        password: e.target.password.value
+      },
+      this.signUserInSuccess
+    )
+  }
+
+  handleNewUserCreationSubmit = e => {
+    e.preventDefault()
+>>>>>>> 7e5be8026e22352a79f46e938568132a11a4485f
+    this.setState(
+      {
+        username: e.target.username.value,
+        password: e.target.password.value
+      },
+      this.createUser
     )
   }
 
@@ -43,7 +79,15 @@ class StartApp extends React.Component {
           exact
           path='/'
           component={props => {
-            return <Login {...props} loggingIn={this.loggingIn} />
+            return (
+              <Login
+                {...props}
+                loggingIn={this.loggingIn}
+                onHandleAuthenticationSubmit={this.handleAuthenticationSubmit}
+                onHandleNewUserCreationSubmit={this.handleNewUserCreationSubmit}
+                createNewUserPage={this.createNewUserPage}
+              />
+            )
           }}
         />
         <Route
